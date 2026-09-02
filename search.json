@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "E155 Resources",
+    "section": "",
+    "text": "Link to course website."
+  },
+  {
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1: FPGA and MCU Setup and Testing\n\n\n\n\n\n\n\n\nAug 30, 2026\n\n\nZachary Wood\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
+    "section": "",
+    "text": "Zachary Wood is a junior computer science major at Harvey Mudd College. Their academic and career interests are in the field of computer engineering, particularly FPGA and digital circuit design and verification, computer architecture for CPUs and GPUs, and analog circuit design for sensors and mixed-signal ASICs. They are a member of the Harvey Mudd Analog Circuit Engineering lab, headed by Matthew Spencer, and the Harvey Mudd Sustainability and Network Design Lab, headed by Arthi Padmanabhan. Outside of working on things related to computer engineering, they can be found bouldering, reading/writing fantasy or science fiction, or studying Mandarin before studying abroad in Shanghai."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blog",
+    "section": "",
+    "text": "Initial Reflections\n\n\nSome of my goals for my semester in MicroPs\n\n\n\n\n\nSep 2, 2026\n\n\nZachary Wood\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "Initial Reflections",
+    "section": "",
+    "text": "I am a computer science major who wants to pursue computer engineering in grad school and in my career, and I am broadly interested in three categories of CE/EE: SoC development, ASIC development, and FPGA development. A lot of what I have applied to during this summer for Summer 2027 have been FPGA engineer internships at high-frequency trading companies since they have a quick development loop that’s constantly introducing problems, but now that Nvidia and AMD have posted their internship a week or so ago, I am also applying to those since i am very interested in the kind of broad subject of computer architecture. I have experience programming microcontrollers and some experience working with FPGAs, but I don’t much lab/project experience for something like a portfolio for either of the two, and I have not worked on something that incorporated both, so I am very excited to do that this semester. Overall, my main goals for this summer are to get more experience in using C/C++ for microcontroller programming, using SystemVerilog for FPGAs, developing projects from specs, parsing larger and denser datasheets, and I want to build a portfolio of my work and progress."
+  }
+]
