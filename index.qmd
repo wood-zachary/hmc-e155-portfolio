@@ -1,0 +1,15 @@
+---
+title: "E155 Portfolio"
+image: images/headshot.jpg
+about:
+    template: jolla
+    links:
+        - icon: linkedin
+          text: LinkedIn
+          href: https://www.linkedin.com/in/zwoodhmc/
+        - icon: github
+          text: GitHub
+          href: https://github.com/wood-zachary
+---
+
+Zachary Wood is a junior computer science major at [Harvey Mudd College](https://hmc.edu). Their academic and career interests are in the field of computer engineering, particularly FPGA and digital circuit design and verification, computer architecture for CPUs and GPUs, and analog circuit design for sensors and mixed-signal ASICs. They are a member of the Harvey Mudd Analog Circuit Engineering lab, headed by [Matthew Spencer](https://www.hmc.edu/engineering/matthew-spencer/), and the Harvey Mudd Sustainability and Network Design Lab, headed by [Arthi Padmanabhan](https://artpad6.github.io/). Outside of working on things related to computer engineering, they can be found bouldering, reading/writing fantasy or science fiction, or studying Mandarin before studying abroad in Shanghai. 
