@@ -7,7 +7,8 @@ module lab1_zw(
 
 	// Counter logic for led[2]'s 4.8 Hz clock
 	logic [24:0] cnt_q;
-	logic cnt_en;
+	assign cnt_en = 1'b1;
+	assign cnt_rst = 1'b0;
 
 	// Internal high-speed oscillator logic
 	logic int_osc;
@@ -22,7 +23,7 @@ module lab1_zw(
 	// Counter used to achieve 2.4 Hz clock
 	counter #(.N(25), .MAX(25'd19_999_999)) cnt (
 		.clk(int_osc),
-		.rst(rst),
+		.rst(cnt_rst),
 		.en(cnt_en),
 		.q(cnt_q)
 	);

@@ -10,8 +10,8 @@ module counter #(
 );
 
     always_ff @(posedge clk, posedge rst)
-		if (rst) q <= 0;
-		else if (en) begin
+        if (rst) q <= 0;
+        else if (en) begin
             if (q >= MAX) q <= 0;
             else q <= q + 1;
         end
