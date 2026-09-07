@@ -6,8 +6,7 @@ module lab1_zw(
 );
 
 	// Counter logic for led[2]'s 4.8 Hz clock
-	logic [31:0] cnt_q;
-	logic [31:0] cnt_max = 32'd9999999;  // overflow rate = 48e6/10e6 = 4.8 Hz
+	logic [24:0] cnt_q;
 	logic cnt_en;
 
 	// Internal high-speed oscillator logic
@@ -21,7 +20,7 @@ module lab1_zw(
 	);
 
 	// Counter used to achieve 2.4 Hz clock
-	counter cnt (
+	counter #(.N(25), .MAX(25'd19_999_999)) cnt (
 		.clk(int_osc),
 		.rst(rst),
 		.en(cnt_en),
@@ -30,10 +29,13 @@ module lab1_zw(
 
 	// Decoder for the seven segment display
 	seven_seg_decoder sev_seg_dec (
-		.whatever()
+		.s(s),
+		.seg(seg)
 	);
 
-	// switch logic
-
+	// Switch-to-LED logic
+	assign led[0] = s[0] ^ s[1];
+	assign led[1] = s[2] & s[3];
+	assign led[2] = (cnt_q < 24'd10_000_000);
 
 endmodule
