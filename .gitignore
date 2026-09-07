@@ -2,6 +2,7 @@
 /.quarto/
 /_site/
 Thumbs.db
+.svlint.toml
 
 # Lattice Radiant files
 *.html
