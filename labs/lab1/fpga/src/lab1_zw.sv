@@ -5,11 +5,9 @@ module lab1_zw(
 	output logic [6:0] seg  // the segments of a common-anode 7-segment display
 );
 
-	// Counter logic
-	// f_out = f_in * p / 2^n
-	// result: 2.402812 Hz (error: +0.00281 Hz, +0.117%)
-	logic [31:0] cnt_p = 32'd215;
+	// Counter logic for led[2]'s 4.8 Hz clock
 	logic [31:0] cnt_q;
+	logic [31:0] cnt_max = 32'd9999999;  // overflow rate = 48e6/10e6 = 4.8 Hz
 	logic cnt_en;
 
 	// Internal high-speed oscillator logic
@@ -22,13 +20,12 @@ module lab1_zw(
 		.CLKHF(int_osc)
 	);
 
-	// Counter used to achieve a 2.4 Hz clock
+	// Counter used to achieve 2.4 Hz clock
 	counter cnt (
 		.clk(int_osc),
 		.rst(rst),
-		.en(en),
-		.p(p),
-		.q(q)
+		.en(cnt_en),
+		.q(cnt_q)
 	);
 
 	// Decoder for the seven segment display
