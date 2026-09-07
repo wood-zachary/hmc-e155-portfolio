@@ -1,9 +1,65 @@
 ---
 author: "Zachary Wood"
-date: "8/30/26"
+date: "9/9/26"
 categories:
   - labreport
 draft: false
 ---
 
 ## Lab 1: FPGA and MCU Setup and Testing
+
+## Introduction
+
+Briefly explain what was done.
+
+<!-- TODO -->
+
+## Design and Testing Methodology
+
+Explain how you approached the design of this assignment from both a software and a hardware standpoint (as appropriate). Include how you tested your design. These tests should convince the reader that the requirements of the assignment have been met.
+
+<!-- TODO -->
+
+## Technical Documentation
+
+Include a link to a Git repository with your Verilog code, a block diagram of your design, and schematics of your circuits.
+
+The source code for this lab is available in [the associated Git repository](#).
+
+<!-- TODO -->
+
+### Block Diagram
+
+Insert block diagram image. Every net and port must be labeled, including submodule port names even when they match the top-level net name.
+
+<!-- TODO -->
+
+### Schematic
+
+Insert schematic image and note component values
+
+<!-- TODO -->
+
+## Results and Discussion
+
+Did you accomplish all of the prescribed tasks? If not, what are the shortcomings? How might you address them given more time? As appropriate, how did the design perform (e.g., How fast/accurate/reliable was it?).
+
+<!-- TODO -->
+
+### Testbench Simulation
+
+Insert waveform screenshots.
+
+<!-- TODO -->
+
+## Conclusion
+
+Briefly summarize what was done and how it performed. Also note how many hours you spent working on the lab.
+
+<!-- TODO -->
+
+## AI Prototype Summary
+
+Include generated code, chat transcripts, and a reflection on how well it worked
+
+<!-- TODO -->
