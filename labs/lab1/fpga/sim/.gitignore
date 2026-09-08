@@ -1,0 +1,25 @@
+# Compiled HDL library directories
+work/
+msim/
+*_design/
+transcript
+
+# Simulation transcripts, waveforms, and coverage data
+*.log
+*.wlf
+*.ucdb
+*.vstf
+*.db
+
+# Optimization and simulation artifacts
+vsim.wlf
+wlft??????
+vsim_stacktrace.vstf
+
+# Generated schematic and simulation data structures
+modelsim.ini
+
+# Misc.
+*.bak
+*.mti
+*.mpf
