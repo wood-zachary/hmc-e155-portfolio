@@ -3,12 +3,14 @@
 module lab1_zw_tb ();
 
     logic [3:0] s;
+    logic       rst_n;
     logic [2:0] led;
     logic [6:0] seg;
     int         errors;
 
     lab1_zw dut (
         .s(s),
+        .rst_n(rst_n),
         .led(led),
         .seg(seg)
     );
@@ -33,6 +35,10 @@ module lab1_zw_tb ();
 
     initial begin
         errors = 0;
+
+        rst_n = 0;
+        #10;
+        rst_n = 1;
 
         for (int i = 0; i < 16; i++) begin
             s = i;

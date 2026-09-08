@@ -1,5 +1,6 @@
 module lab1_zw(
 	input logic	[3:0] s,  // the four DIP switches (on the board, SW6)
+	input logic rst_n,  // active-low push button (internal pull-up), used to reset cnt
 
 	output logic [2:0] led,  // three on-board LEDs
 	output logic [6:0] seg  // the segments of a common-anode 7-segment display
@@ -8,7 +9,7 @@ module lab1_zw(
 	// Counter logic for led[2]'s 4.8 Hz clock
 	logic [24:0] cnt_q;
 	assign cnt_en = 1'b1;
-	assign cnt_rst = 1'b0;
+	assign cnt_rst = ~rst_n;
 
 	// Internal high-speed oscillator logic
 	logic int_osc;

@@ -9,8 +9,6 @@ module counter #(
     output logic [N-1:0] q
 );
 
-    initial q = 0;
-
     always_ff @(posedge clk, posedge rst)
         if (rst) q <= 0;
         else if (en) begin
