@@ -27,6 +27,7 @@ module counter_tb ();
         // Verify enable
         en = 0;
         @(posedge clk);
+        #1;
         assert (q == 3'b000)
             $display("PASSED! The counter behaves as desired at time: %0t.", $time);
         else begin
@@ -36,6 +37,7 @@ module counter_tb ();
 
         en = 1;
         @(posedge clk);
+        #1;
         assert (q == 3'b001)
             $display("PASSED! The counter behaves as desired at time: %0t.", $time);
         else begin
@@ -54,6 +56,7 @@ module counter_tb ();
         end
 
         @(posedge clk);
+        #1;
         assert (q == 3'b000)
             $display("PASSED! The counter behaves as desired at time: %0t.", $time);
         else begin
@@ -65,6 +68,7 @@ module counter_tb ();
 
         // Verify max count
         repeat (dut.MAX) @(posedge clk);
+        #1;
         assert (q == dut.MAX)
             $display("PASSED! The counter behaves as desired at time: %0t.", $time);
         else begin
@@ -73,6 +77,7 @@ module counter_tb ();
         end
 
         @(posedge clk);  // one more edge should wrap back to 0
+        #1;
         assert (q == 3'b000)
             $display("PASSED! The counter behaves as desired at time: %0t.", $time);
         else begin

@@ -10,3 +10,44 @@ Thumbs.db
 *.emSession
 *.jlink
 **/*.quarto_ipynb
+
+# Lattice Radiant
+*.html
+impl*/
+*.xml
+.build_status
+.run_manager.ini
+.recovery
+.spread_sheet.ini
+.spreadsheet_view.ini
+*.dir/
+*.log
+*.tcl
+*.ccl
+*.srp
+*.dmp
+._Real_._Math_.vhd
+
+# QuestaSim / ModelSim compilation and simulation output, adapted from
+# https://gitlab.com/gitlab-org/gitlab/-/blob/v10.5.0-rc3-ee/vendor/gitignore/Global/ModelSim.gitignore
+work/
+msim/
+*_design/
+transcript*
+*.mti
+*.dat
+*.dbs
+*.psm
+*.bak
+*.cmp
+*.bsf
+*.wlf
+wlf*
+*.vstf
+*.ucdb
+*.db
+cov*/
+sc_dpiheader.h
+vsim.dbg
+modelsim.ini
+*.mpf
