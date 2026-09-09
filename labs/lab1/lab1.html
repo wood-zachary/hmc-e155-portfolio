@@ -9,7 +9,7 @@
 <meta name="author" content="Zachary Wood">
 <meta name="dcterms.date" content="2026-09-09">
 
-<title>lab1 – E155 Portfolio</title>
+<title>Lab 1: FPGA and MCU Setup and Testing – E155 Portfolio</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -193,8 +193,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lab-1-fpga-and-mcu-setup-and-testing" id="toc-lab-1-fpga-and-mcu-setup-and-testing" class="nav-link active" data-scroll-target="#lab-1-fpga-and-mcu-setup-and-testing">Lab 1: FPGA and MCU Setup and Testing</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a>
   <ul class="collapse">
   <li><a href="#development-board-assembly" id="toc-development-board-assembly" class="nav-link" data-scroll-target="#development-board-assembly">Development Board Assembly</a></li>
@@ -219,6 +218,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<h1 class="title">Lab 1: FPGA and MCU Setup and Testing</h1>
   <div class="quarto-categories">
     <div class="quarto-category">labreport</div>
   </div>
@@ -250,13 +250,9 @@ window.Quarto = {
 </header>
 
 
-<section id="lab-1-fpga-and-mcu-setup-and-testing" class="level2">
-<h2 class="anchored" data-anchor-id="lab-1-fpga-and-mcu-setup-and-testing">Lab 1: FPGA and MCU Setup and Testing</h2>
-</section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>The goal of this lab was to become familiarized with the microcontroller unit (MCU) and field-programmable gate array (FPGA) used this semester. I assembled a <a href="https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf">development board</a> containing a <a href="https://hmc-e155.github.io/assets/doc/ds11451-stm32l432kc.pdf">Nucleo-L432KC MCU</a> and an <a href="https://upduino.readthedocs.io/en/latest/index.html#">UPduino v3.1</a> Lattice iCE40UP5K FPGA development board, wrote and verified SystemVerilog modules to control three on-board LEDs and an external 7-segment display using four on-board DIP switches, and programmed the FPGA with my synethsised design.</p>
-<p><a href="https://hmc-e155.github.io/lab/lab1/specs.html">Specs</a></p>
 </section>
 <section id="design-and-testing-methodology" class="level2">
 <h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
@@ -581,8 +577,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Reflection: The corrected code synthesized successfully in Lattice Radiant on the second attempt. In terms of quality, the output seems clean and idiomatic: it used <code>logic</code>, parameterized the clock frequency and blink frequency, derived the counter width with <code>$clog2</code>, and used underscore-separated numeric literals for readability. However, per personal preference, I find the amount of comments excessive.</p>
-<p>The mistake Claude made was assuming the open-source Yosys/nextpnr primitive name (<code>SB_HFOSC</code>) would be used instead of Lattice Radiant’s (<code>HSOSC</code>). Ideally, Claude would predict that issue in advance and ask which toolchain was in use before generating any code. However, I also could have provided the information about the toolchain myself, and I would normally do so if I were to ask Claude to generate code like this.</p>
+<p>Reflection: The corrected code synthesized successfully in Lattice Radiant on the second attempt. In terms of quality, the output seems clean and idiomatic: it used <code>logic</code>, parameterized the clock frequency and blink frequency, derived the counter width with <code>$clog2</code>, and used underscore-separated numeric literals for readability. However, for my preferences, I find the amount of comments excessive.</p>
+<p>The mistake Claude made was assuming the open-source Yosys/nextpnr primitive name (<code>SB_HFOSC</code>) would be used instead of Lattice Radiant’s (<code>HSOSC</code>). Ideally, Claude would predict that issue in advance and ask which toolchain was in use before generating any code. However, I also could have provided the information about the toolchain myself, and I would normally do so if I were to ask an LLM to generate code like this.</p>
 
 
 </section>
