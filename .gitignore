@@ -2,8 +2,16 @@
 /.quarto/
 /_site/
 Thumbs.db
+.svlint.toml
 
-# Lattice Radiant files
+# Segger Embedded Studio
+**/Output/
+**/Debug/
+*.emSession
+*.jlink
+**/*.quarto_ipynb
+
+# Lattice Radiant
 *.html
 impl*/
 *.xml
@@ -19,10 +27,29 @@ impl*/
 *.srp
 *.dmp
 ._Real_._Math_.vhd
+*.xcf
+*.pfl
 
-# Segger Embedded Studio
-**/Output/
-**/Debug/
-*.emSession
-*.jlink
-**/*.quarto_ipynb
+# QuestaSim / ModelSim compilation and simulation output, adapted from
+# https://gitlab.com/gitlab-org/gitlab/-/blob/v10.5.0-rc3-ee/vendor/gitignore/Global/ModelSim.gitignore
+work/
+msim/
+*_design/
+transcript*
+*.mti
+*.dat
+*.dbs
+*.psm
+*.bak
+*.cmp
+*.bsf
+*.wlf
+wlf*
+*.vstf
+*.ucdb
+*.db
+cov*/
+sc_dpiheader.h
+vsim.dbg
+modelsim.ini
+*.mpf

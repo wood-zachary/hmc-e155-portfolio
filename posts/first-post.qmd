@@ -5,7 +5,6 @@ author: "Zachary Wood"
 date: "9/2/26"
 categories:
   - reflection
-  - labreport
 draft: false
 ---
 
