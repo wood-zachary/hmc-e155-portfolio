@@ -9,8 +9,10 @@ module lab2_zw(
 	output logic [3:0] kp_row	// asserted row to scan keypad
 );
 
-	// Internal high-speed oscillator logic
 	logic int_osc;
+	logic sel;
+	logic [15:0] mux_count;
+	logic [3:0] digit_data;
 
 	// Internal high-speed oscillator generating a 48 MHz clock
 	HSOSC hf_osc (
@@ -19,19 +21,13 @@ module lab2_zw(
 		.CLKHF(int_osc)
 	);
 
-	// Multiplexing counter selecting the active digit
-	// TODO: choose new N and MAX for swapping without flickering/bleeding
-	logic [24:0] mux_count;
-	counter #(.N(25), .MAX(25'd19_999_999)) mux_cnt (
+	// Multiplexing counter for toggling the active digit at 1 kHz
+	counter #(.N(16), .MAX(16'd47_999)) mux_cnt (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.en(1'b1),
 		.count(mux_count)
 	);
-
-	// TODO: derive a digit-select bit from mux_count, mux s[3:0]/s[7:4]
-	// into digit_data below, and drive an_en[1:0] from the same select bit
-	logic [3:0] digit_data;
 
 	// Decoder for the seven segment display shared by both digits
 	seven_seg_decoder sev_seg_dec (
@@ -40,13 +36,15 @@ module lab2_zw(
 	);
 
 	// Keypad row scanning
-	keypad_scanner scan (
+	keypad_scanner kp_scanner (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.en(1'b1),
 		.kp_row(kp_row)
 	);
 
-	// TODO: assign leds based on kp_col
+	assign digit_data = (mux_count < 16'd24_000) ? s[7:4] : s[3:0];
+	assign an_en = (mux_count < 16'd24_000) ? 2'b01 : 2'b10;
+	assign led = ~kp_col;
 
 endmodule

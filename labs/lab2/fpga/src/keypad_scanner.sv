@@ -6,15 +6,19 @@ module keypad_scanner(
 	output logic [3:0] kp_row
 );
 
-	// TODO: choose N and MAX so kp_row's four states rotate at 2 Hz per bit
 	logic [24:0] scan_count;
-	counter #(.N(25), .MAX(25'd19_999_999)) scan_cnt (
+
+	// Cycle through all rows at 2 Hz
+	counter #(.N(25), .MAX(25'd23_999_999)) scan_cnt (
 		.clk(clk),
 		.rst(rst),
 		.en(en),
 		.count(scan_count)
 	);
 
-	// TODO: decode scan_count into 1000/0100/0010/0001
+	assign kp_row = (scan_count < 25'd6_000_000)  ? 4'b1000 :
+	                (scan_count < 25'd12_000_000) ? 4'b0100 :
+	                (scan_count < 25'd18_000_000) ? 4'b0010 :
+	                                                 4'b0001;
 
 endmodule
