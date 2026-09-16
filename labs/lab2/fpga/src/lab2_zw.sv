@@ -22,7 +22,7 @@ module lab2_zw(
 	);
 
 	// Multiplexing counter for toggling the active digit at 1 kHz
-	counter #(.N(16), .MAX(16'd47_999)) mux_cnt (
+	counter #(.WIDTH(16), .MAX(16'd47_999)) mux_cnt (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.en(1'b1),

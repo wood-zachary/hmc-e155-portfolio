@@ -9,7 +9,7 @@ module keypad_scanner(
 	logic [24:0] scan_count;
 
 	// Cycle through all rows at 2 Hz
-	counter #(.N(25), .MAX(25'd23_999_999)) scan_cnt (
+	counter #(.WIDTH(25), .MAX(25'd23_999_999)) scan_cnt (
 		.clk(clk),
 		.rst(rst),
 		.en(en),

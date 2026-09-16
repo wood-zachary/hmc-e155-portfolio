@@ -1,5 +1,5 @@
 module counter #(
-    parameter int N = 32,
+    parameter int WIDTH = 32,
     parameter logic [N-1:0] MAX = '1
     ) (
     input logic clk,
