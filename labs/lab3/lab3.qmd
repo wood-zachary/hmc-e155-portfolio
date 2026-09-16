@@ -40,6 +40,10 @@ Insert schematic image and note component values
 
 <!-- TODO -->
 
+#### Calculations
+
+<!-- TODO -->
+
 ## Results and Discussion
 
 Did you accomplish all of the prescribed tasks? If not, what are the shortcomings? How might you address them given more time? As appropriate, how did the design perform (e.g., How fast/accurate/reliable was it?).
