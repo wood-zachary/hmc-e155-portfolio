@@ -1,12 +1,12 @@
 module counter #(
     parameter int WIDTH = 32,
-    parameter logic [N-1:0] MAX = '1
+    parameter logic [WIDTH-1:0] MAX = '1
     ) (
     input logic clk,
     input logic rst,
     input logic en,
 
-    output logic [N-1:0] count
+    output logic [WIDTH-1:0] count
 );
 
     always_ff @(posedge clk, posedge rst)
