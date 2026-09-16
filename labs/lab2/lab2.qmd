@@ -40,7 +40,7 @@ Figure 1 shows the top-level architecture of `lab2_zw`. `HSOSC` generates `int_o
 
 ### Schematic
 
-Figure 2 shows the schematic of the physical circuit. The display is a common-anode dual seven-segment display, driven by one 2N3906 PNP transistor per digit with an 820 Ω base resistor, and 220 Ω current-limiting resistors on each shared segment cathode. The keypad is a 4x4 matrix keypad, with each row driven through a 2N3904 NPN transistor wired as an open-collector output (also 820 Ω base resistors), and columns read back through the FPGA's internal pull-ups.
+Figure 2 shows the schematic of the physical circuit. The display is a common-anode dual seven-segment display, driven by one 2N3906 PNP transistor per digit with an 820 Ω base resistor, and 330 Ω current-limiting resistors on each shared segment cathode. The keypad is a 4x4 matrix keypad, with each row driven through a 2N3904 NPN transistor wired as an open-collector output (also 820 Ω base resistors), and columns read back through the FPGA's internal pull-ups.
 
 A single combined pin assignment would have required routing some signals through pins tied to the UPduino's on-board LEDs, causing distracting LED activity, so the display multiplexing and keypad scanning were synthesized and tested as two separate builds sharing the same HDL modules.
 
@@ -48,9 +48,9 @@ A single combined pin assignment would have required routing some signals throug
 
 #### Calculations
 
-**Segment current.** Per the MAN6410 datasheet, each segment has a typical forward voltage $V_{ON} = 2.1\text{ V}$ (max 2.8 V) at $I_F = 20\text{ mA}$, with an absolute maximum continuous forward current of 30 mA per segment. The 150 Ω series resistors I used in lab 1 would have put the segment current right at the 8 mA $I_{OL}$ maximum, so I replaced them with 220 Ω series resistors. With $V_{DD} = 3.3\text{ V}$:
+**Segment current.** Per the MAN6410 datasheet, each segment has a typical forward voltage $V_{ON} = 2.1\text{ V}$ (max 2.8 V) at $I_F = 20\text{ mA}$, with an absolute maximum continuous forward current of 30 mA per segment. The 150 Ω series resistors I used in lab 1 would have put the segment current right at the 8 mA $I_{OL}$ maximum, so I replaced them with 330 Ω series resistors. With $V_{DD} = 3.3\text{ V}$:
 
-$$I_F = \frac{V_{DD} - V_{ON}}{R} = \frac{3.3\text{ V} - 2.1\text{ V}}{220\ \Omega} \approx 5.5\text{ mA}$$
+$$I_F = \frac{V_{DD} - V_{ON}}{R} = \frac{3.3\text{ V} - 2.1\text{ V}}{330\ \Omega} \approx 3.6\text{ mA}$$
 
 comfortably under the 8 mA maximum.
 
@@ -64,7 +64,7 @@ well under the FPGA's 8 mA maximum.
 
 ## Results and Discussion
 
-This design meets all of the lab's proficiency and excellence requirements. Both digits display correctly with consistent brightness, since every segment shares an identical 220 Ω resistor and only one digit's anode is enabled at a time, and the 1 kHz refresh rate avoids visible flicker or bleeding. The keypad scanning signal correctly drives `led[3:0]` under all keypress conditions, including multiple simultaneous presses, since each row driver is open-collector and each column is independently pulled up by internal pull-up resistors.
+This design meets all of the lab's proficiency and excellence requirements. Both digits display correctly with consistent brightness, since every segment shares an identical 330 Ω resistor and only one digit's anode is enabled at a time, and the 1 kHz refresh rate avoids visible flicker or bleeding. The keypad scanning signal correctly drives `led[3:0]` under all keypress conditions, including multiple simultaneous presses, since each row driver is open-collector and each column is independently pulled up by internal pull-up resistors.
 
 The top-level module only contains instances of `HSOSC`, the decoder, and the two counter modules, plus assign statements; `keypad_scanner` only instances a counter and an assign statement; and both counters are parametrized instances of my lab 1 `counter` module. The design was verified as two separate hardware builds rather than one combined build to avoid pin conflicts with the on-board LEDs, and both builds functioned correctly.
 
@@ -96,10 +96,157 @@ The purpose of the AI Prototype is to experiment with utilizing AI as a coding a
 
 ::: {.callout-tip}
 ## AI Prototypes (Claude, incognito mode, Sonnet 5, high reasoning effort)
-Prompt 1: "Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg."
+"Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits."
 
-Prompt 2 (also in incognito mode, with my lab 1 files attached as context): "Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits. Use the seven segment decoder and oscillator provided in the attached files."
 :::
 
+::: {.callout-tip}
+## AI Prototypes (Claude, incognito mode, Sonnet 5, high reasoning effort, lab 1 counter.sv and seven_seg_decoder.sv attached as context)
+"Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits. Use the seven segment decoder and oscillator provided in the attached files."
 
-<!-- TODO -->
+:::
+
+::: {.callout-note collapse="true"}
+## Generated code, prompt 1
+```systemverilog
+// =============================================================================
+// seg7_decode
+// Combinational 4-bit binary to seven-segment decoder.
+// Common anode display, active-low segment outputs.
+// Segment bit order: seg[6:0] = {g, f, e, d, c, b, a}
+// =============================================================================
+module seg7_decode (
+    input  logic [3:0] value,
+    output logic [6:0] seg
+);
+
+    always_comb begin
+        unique case (value)
+            4'h0:    seg = 7'b1000000;
+            4'h1:    seg = 7'b1111001;
+            4'h2:    seg = 7'b0100100;
+            4'h3:    seg = 7'b0110000;
+            4'h4:    seg = 7'b0011001;
+            4'h5:    seg = 7'b0010010;
+            4'h6:    seg = 7'b0000010;
+            4'h7:    seg = 7'b1111000;
+            4'h8:    seg = 7'b0000000;
+            4'h9:    seg = 7'b0010000;
+            4'hA:    seg = 7'b0001000;
+            4'hB:    seg = 7'b0000011;
+            4'hC:    seg = 7'b1000110;
+            4'hD:    seg = 7'b0100001;
+            4'hE:    seg = 7'b0000110;
+            4'hF:    seg = 7'b0001110;
+            default: seg = 7'b1111111;
+        endcase
+    end
+
+endmodule
+
+// =============================================================================
+// seg7_time_mux2
+// Time-multiplexes a single seg7_decode instance across two 4-bit inputs.
+// Each output bus is registered and holds its decoded value between
+// updates, so both displays remain static rather than blinking.
+// =============================================================================
+module seg7_time_mux2 (
+    input  logic       clk,
+    input  logic       rst,
+    input  logic [3:0] value0,
+    input  logic [3:0] value1,
+    output logic [6:0] seg0,
+    output logic [6:0] seg1
+);
+
+    logic       sel;
+    logic [3:0] value_mux;
+    logic [6:0] seg_dec;
+
+    assign value_mux = sel ? value1 : value0;
+
+    seg7_decode u_seg7_decode (
+        .value (value_mux),
+        .seg   (seg_dec)
+    );
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            sel  <= 1'b0;
+            seg0 <= 7'b1111111;
+            seg1 <= 7'b1111111;
+        end else begin
+            sel <= ~sel;
+            if (sel) begin
+                seg1 <= seg_dec;
+            end else begin
+                seg0 <= seg_dec;
+            end
+        end
+    end
+
+endmodule
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Generated code, prompt 2 (with lab 1 files attached)
+```systemverilog
+module seven_seg_mux #(
+    parameter int N = 17,
+    parameter logic [N-1:0] MAX = 17'd99_999
+) (
+    input  logic       clk,
+    input  logic       rst,
+
+    input  logic [3:0] digit0,
+    input  logic [3:0] digit1,
+
+    output logic [6:0] seg,
+    output logic [1:0] an
+);
+
+    logic [N-1:0] refresh_count;
+    logic         refresh_tick;
+    logic         digit_sel;
+    logic [3:0]   digit_mux;
+
+    counter #(
+        .N   (N),
+        .MAX (MAX)
+    ) refresh_counter (
+        .clk (clk),
+        .rst (rst),
+        .en  (1'b1),
+        .q   (refresh_count)
+    );
+
+    assign refresh_tick = (refresh_count == MAX);
+
+    counter #(
+        .N   (1),
+        .MAX (1'b1)
+    ) digit_sel_counter (
+        .clk (clk),
+        .rst (rst),
+        .en  (refresh_tick),
+        .q   (digit_sel)
+    );
+
+    assign digit_mux = digit_sel ? digit1 : digit0;
+
+    seven_seg_decoder decoder (
+        .s   (digit_mux),
+        .seg (seg)
+    );
+
+    always_comb begin
+        an            = 2'b11;
+        an[digit_sel] = 1'b0;
+    end
+
+endmodule
+```
+:::
+
+Reflection: Without any lab context, the first prompt's design time-multiplexed the decoder's combinational logic, but latched the two digits onto two entirely separate 7-bit output buses, an architecture that only works if the board exposes two independent segment buses rather than the single, anode-multiplexed bus we use in this lab. It did mention that a shared bus would instead need a slow anode-select clock divider, but did not generate that version. With lab 1's `counter` and `seven_seg_decoder` modules attached as context, the second prompt generated two instances of the existing `counter` module (one free-running for the refresh period, one a 1-bit toggle clocked by the first's terminal count) driving a single `seven_seg_decoder` instance through a 2:1 mux, with `an[1:0]` selecting the active digit. Giving the model the actual modules to reuse, rather than describing the goal in the abstract, got the LLM to infer the actual physical constraint (one shared segment bus).
