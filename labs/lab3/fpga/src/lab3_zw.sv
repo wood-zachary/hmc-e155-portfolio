@@ -76,7 +76,6 @@ module lab3_zw(
 	keypad_scanner kp_scanner (
 		.clk(int_osc),
 		.rst(~rst_n),
-		.en(1'b1),
 		.kp_col(kp_col_db),
 		.kp_row(kp_row),
 		.digit0(digit0),
