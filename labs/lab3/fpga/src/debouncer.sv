@@ -1,11 +1,9 @@
-module debouncer #(
-    parameter int WIDTH = 1
-) (
+module debouncer (
     input  logic clk,
     input  logic rst,
-    input  logic [WIDTH-1:0] btn_in,  // Should already be synchronized
+    input  logic btn_in,  // Should already be synchronized
 
-    output logic [WIDTH-1:0] btn_out
+    output logic btn_out
 );
 
     typedef enum logic [1:0] {IDLE, WAIT, PRESSED} statetype;
@@ -16,20 +14,23 @@ module debouncer #(
         else     state <= nextState;
 
 
-    logic [19:0] counter;
+    logic [19:0] db_count;
 
-    always_ff @(posedge clk)
-        if (state == IDLE) counter <= 0;
-        else               counter <= counter + 1;
+    counter #(.WIDTH(20)) db_counter (
+        .clk(clk),
+        .rst(rst || (state == IDLE)),
+        .en(1'b1),
+        .count(db_count)
+    );
 
 
     always_comb
         case (state)
-            IDLE:                          nextState = btn ? WAIT : IDLE;
-            WAIT:    if (!btn)             nextState = IDLE;  // A bounce
-                     else if (counter[19]) nextState = PRESSED;
+            IDLE:                          nextState = btn_in ? WAIT : IDLE;
+            WAIT:    if (!btn_in)          nextState = IDLE;  // A bounce
+                     else if (db_count[19]) nextState = PRESSED;
                      else                  nextState = WAIT;
-            PRESSED:                       nextState = btn ? PRESSED: IDLE;
+            PRESSED:                       nextState = btn_in ? PRESSED : IDLE;
             default:                       nextState = IDLE;
         endcase
 

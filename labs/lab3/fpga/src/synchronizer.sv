@@ -13,7 +13,7 @@ module synchronizer #(
     logic [STAGES-1:0][WIDTH-1:0] sync_regs;
 
     always_ff @(posedge clk, posedge rst) begin
-        if (rst) sync_regs <= INIT_VAL;
+        if (rst) sync_regs <= {STAGES{INIT_VAL}};
         else sync_regs <= {sync_regs[STAGES-2:0], data_in};
     end
 

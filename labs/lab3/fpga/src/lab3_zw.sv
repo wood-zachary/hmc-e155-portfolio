@@ -29,16 +29,37 @@ module lab3_zw(
 		.data_out(kp_col_sync)
 	);
 
-	// Debouncer for syncrhonized kp_col_sync inputs
-	debouncer debounce (
+	// Debouncers for synchronized kp_col_sync inputs, one per column
+	debouncer debounce0 (
 		.clk(int_osc),
 		.rst(~rst_n),
-		.btn_in(kp_col_sync),
-		.btn_out(kp_col_db)
+		.btn_in(kp_col_sync[0]),
+		.btn_out(kp_col_db[0])
+	);
+
+	debouncer debounce1 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.btn_in(kp_col_sync[1]),
+		.btn_out(kp_col_db[1])
+	);
+
+	debouncer debounce2 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.btn_in(kp_col_sync[2]),
+		.btn_out(kp_col_db[2])
+	);
+
+	debouncer debounce3 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.btn_in(kp_col_sync[3]),
+		.btn_out(kp_col_db[3])
 	);
 
 	// Multiplexing counter for toggling the active digit at 1 kHz
-	counter #(.WIDTH(16), .MAX(16'd47_999)) mux_cnt (
+	counter #(.WIDTH(16), .MAX(16'd47_999)) mux_counter (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.en(1'b1),
@@ -59,8 +80,6 @@ module lab3_zw(
 		.kp_row(kp_row)
 	);
 
-	assign digit_data = (mux_count < 16'd24_000) ? s[7:4] : s[3:0];
 	assign an_en = (mux_count < 16'd24_000) ? 2'b01 : 2'b10;
-	assign led = ~kp_col;
 
 endmodule
