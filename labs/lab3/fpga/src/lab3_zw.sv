@@ -10,7 +10,7 @@ module lab3_zw(
 	logic int_osc;
 	logic sel;
 	logic [15:0] mux_count;
-	logic [3:0] digit_data;
+	logic [3:0] digit0, digit1, digit_out;
 	logic [3:0] kp_col_sync, kp_col_db;
 
 	// Internal high-speed oscillator generating a 48 MHz clock
@@ -68,7 +68,7 @@ module lab3_zw(
 
 	// Decoder for the seven segment display shared by both digits
 	seven_seg_decoder sev_seg_dec (
-		.s(digit_data),
+		.hex(digit_out),
 		.seg(seg)
 	);
 
@@ -77,9 +77,13 @@ module lab3_zw(
 		.clk(int_osc),
 		.rst(~rst_n),
 		.en(1'b1),
-		.kp_row(kp_row)
+		.kp_col(kp_col_db),
+		.kp_row(kp_row),
+		.digit0(digit0),
+		.digit1(digit1)
 	);
 
+	assign digit_out = (mux_count < 16'd24_000) ? digit1 : digit0;
 	assign an_en = (mux_count < 16'd24_000) ? 2'b01 : 2'b10;
 
 endmodule
