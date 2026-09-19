@@ -5,9 +5,9 @@ module synchronizer #(
 ) (
     input  logic clk,
     input  logic rst,
-    input  logic data_in,
+    input  logic [WIDTH-1:0] data_in,
 
-    output logic data_out
+    output logic [WIDTH-1:0] data_out
 );
 
     logic [STAGES-1:0][WIDTH-1:0] sync_regs;

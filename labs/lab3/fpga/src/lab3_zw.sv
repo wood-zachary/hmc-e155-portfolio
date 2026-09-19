@@ -11,7 +11,7 @@ module lab3_zw(
 	logic sel;
 	logic [15:0] mux_count;
 	logic [3:0] digit_data;
-	logic [3:0] kp_col_sync;
+	logic [3:0] kp_col_sync, kp_col_db;
 
 	// Internal high-speed oscillator generating a 48 MHz clock
 	HSOSC hf_osc (
@@ -20,13 +20,21 @@ module lab3_zw(
 		.CLKHF(int_osc)
 	);
 
-	// Synchronizer for kp_col inputs
+	// Synchronizer for kp_col_async inputs
 	// kp_col is four separate inputs packed together, so an async FIFO shouldn't be necessary
 	synchronizer #(.WIDTH(4), .STAGES(2)) sync (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.data_in(kp_col_async),
 		.data_out(kp_col_sync)
+	);
+
+	// Debouncer for syncrhonized kp_col_sync inputs
+	debouncer debounce (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.btn_in(kp_col_sync),
+		.btn_out(kp_col_db)
 	);
 
 	// Multiplexing counter for toggling the active digit at 1 kHz
