@@ -1,9 +1,9 @@
 module lab3_zw(
-	input  logic 	   rst_n,			// active-low push button (internal pull-up) for reset
-	input  logic [3:0] kp_col_async,	// asynchronous keypad column inputs (pulled up)
+	input  logic 	   rst_n,			// active-low reset, internal pull-up
+	input  logic [3:0] kp_col_async,	// async keypad columns (pulled up)
 
-	output logic [6:0] seg,				// shared segment lines, time multiplexed
-	output logic [1:0] an_en,			// anode enable outputs for time multiplexing digits
+	output logic [6:0] seg,				// shared segment lines, multiplexed
+	output logic [1:0] an_en,			// anode enables for digit multiplexing
 	output logic [3:0] kp_row			// asserted row to scan keypad
 );
 

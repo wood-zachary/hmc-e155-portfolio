@@ -20,21 +20,21 @@ module keypad_scanner(
 
 	always_ff @(posedge clk, posedge rst)
 		if (rst) state <= SCAN;
-		else 	 state <= nextState;
+		else     state <= nextState;
 
 	always_comb
 		case (state)
-			SCAN: if (single_key)   		 nextState = PRESS;
-				  else if (any_key) 		 nextState = HOLD_MULTI;
-				  else			   			 nextState = SCAN;
-			PRESS:   						 nextState = HOLD_SINGLE;
-			HOLD_SINGLE: if (!any_key)		 nextState = SCAN;
-						 else if (!single_key) nextState = HOLD_MULTI;
-				 	     else 				 nextState = HOLD_SINGLE;
-			HOLD_MULTI: if (!any_key)        nextState = SCAN;
-						else if (single_key) nextState = PRESS;
-						else 				 nextState = HOLD_MULTI;
-			default: nextState = SCAN;
+			SCAN:        if (single_key)            nextState = PRESS;
+			             else if (any_key)          nextState = HOLD_MULTI;
+			             else                       nextState = SCAN;
+			PRESS:                                  nextState = HOLD_SINGLE;
+			HOLD_SINGLE: if (!any_key)              nextState = SCAN;
+			             else if (!single_key)      nextState = HOLD_MULTI;
+			             else                       nextState = HOLD_SINGLE;
+			HOLD_MULTI:  if (!any_key)              nextState = SCAN;
+			             else if (single_key)       nextState = PRESS;
+			             else                       nextState = HOLD_MULTI;
+			default:                                nextState = SCAN;
 		endcase
 
 	always_ff @(posedge clk, posedge rst)
@@ -85,7 +85,7 @@ module keypad_scanner(
 			8'b00010010: key = 4'b1110;  // E
 			8'b00010001: key = 4'b1101;  // D
 
-			default: 	 key = 4'b0000;  // 0
+			default:     key = 4'b0000;  // 0
 		endcase
 
 endmodule
