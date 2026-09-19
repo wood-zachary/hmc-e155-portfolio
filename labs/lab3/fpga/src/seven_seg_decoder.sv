@@ -1,11 +1,11 @@
 module seven_seg_decoder (
-    input logic [3:0] s,
+    input logic [3:0] hex,
 
     output logic [6:0] seg
 );
 
 always_comb begin
-    unique case (s)
+    unique case (hex)
         4'b0000: seg = 7'b1000000;  // 0
         4'b0001: seg = 7'b1111001;  // 1
         4'b0010: seg = 7'b0100100;  // 2
