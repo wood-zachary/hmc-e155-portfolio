@@ -26,12 +26,12 @@ module debouncer (
 
     always_comb
         case (state)
-            IDLE:                          nextState = !btn_in ? WAIT : IDLE;
-            WAIT:    if (btn_in)           nextState = IDLE;  // A bounce
-                     else if (db_count[19]) nextState = PRESSED;
-                     else                  nextState = WAIT;
-            PRESSED:                       nextState = !btn_in ? PRESSED : IDLE;
-            default:                       nextState = IDLE;
+            IDLE:                               nextState = !btn_in ? WAIT : IDLE;
+            WAIT:    if (btn_in)                nextState = IDLE;  // A bounce
+                     else if (db_count[19])     nextState = PRESSED;
+                     else                       nextState = WAIT;
+            PRESSED:                            nextState = !btn_in ? PRESSED : IDLE;
+            default:                            nextState = IDLE;
         endcase
 
     assign btn_out = ~(state == PRESSED);
