@@ -20,13 +20,34 @@ module lab3_zw(
 		.CLKHF(int_osc)
 	);
 
-	// Synchronizer for kp_col_async inputs
-	// kp_col is four separate inputs packed together, so an async FIFO shouldn't be necessary
-	synchronizer #(.WIDTH(4), .STAGES(2)) sync (
+	// Synchronizers for kp_col_async inputs, one per column
+	// kp_col packs 4 independent inputs, so no async FIFO is needed
+	synchronizer sync0 (
 		.clk(int_osc),
 		.rst(~rst_n),
-		.data_in(kp_col_async),
-		.data_out(kp_col_sync)
+		.data_in(kp_col_async[0]),
+		.data_out(kp_col_sync[0])
+	);
+
+	synchronizer sync1 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.data_in(kp_col_async[1]),
+		.data_out(kp_col_sync[1])
+	);
+
+	synchronizer sync2 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.data_in(kp_col_async[2]),
+		.data_out(kp_col_sync[2])
+	);
+
+	synchronizer sync3 (
+		.clk(int_osc),
+		.rst(~rst_n),
+		.data_in(kp_col_async[3]),
+		.data_out(kp_col_sync[3])
 	);
 
 	// Debouncers for synchronized kp_col_sync inputs, one per column
