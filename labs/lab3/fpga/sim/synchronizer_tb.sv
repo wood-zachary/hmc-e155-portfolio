@@ -81,7 +81,7 @@ module synchronizer_tb();
             $error("FAILED! data_out=%b 2 cycles after data_in falls at time: %0t.", data_out, $time);
         end
 
-        // Verify a change scheduled right on top of a clock edge 
+        // Verify a change scheduled right on top of a clock edge
         // still resolves to a deterministic 2-cycle latency
         @(posedge clk);
         data_in <= 1'b1;
