@@ -55,10 +55,14 @@ module lab3_zw_tb();
         kp_col_async[3] <= 1'b0;  // settles low right on top of a clock edge
 
         // Force the debounce timer for column 3 near its threshold so the
-        // waveform doesn't have to show the full ~11 ms confirmation window
+        // waveform doesn't have to show the full ~11 ms confirmation window.
+        // Wait for the debouncer to confirm PRESSED to cover the sync+debounce lateny
+        // and then wait the 2 edges keypad_scanner needs to capture a confirmed
+        // press (SCAN -> PRESS, then PRESS -> SINGLE_HOLD with digit0 <= key).
         force dut.debounce3.db_counter.count = 20'd524_288;
-        repeat (4) @(posedge dut.int_osc);
+        wait (dut.debounce3.state == dut.debounce3.PRESSED);
         release dut.debounce3.db_counter.count;
+        repeat (2) @(posedge dut.int_osc);
         #1;
         assert (dut.digit0 == 4'h1 && dut.digit1 == 4'h0)
             $display("PASSED! a bounced, asynchronous press of key 1 decodes correctly at time: %0t.", $time);
@@ -85,8 +89,9 @@ module lab3_zw_tb();
 
         kp_col_async[2] = 1'b0;
         force dut.debounce2.db_counter.count = 20'd524_288;
-        repeat (4) @(posedge dut.int_osc);
+        wait (dut.debounce2.state == dut.debounce2.PRESSED);
         release dut.debounce2.db_counter.count;
+        repeat (2) @(posedge dut.int_osc);
         #1;
         assert (dut.digit0 == 4'h2 && dut.digit1 == 4'h1)
             $display("PASSED! a second press shifts digit0=2, digit1=1 at time: %0t.", $time);
