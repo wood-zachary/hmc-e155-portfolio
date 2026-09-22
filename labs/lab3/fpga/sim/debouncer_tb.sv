@@ -116,7 +116,7 @@ module debouncer_tb();
                    dut.state.name(), btn_out, $time);
         end
 
-        // Verify release is immediate 
+        // Verify release is immediate
         @(negedge clk);
         btn_in = 1;
         @(posedge clk);
