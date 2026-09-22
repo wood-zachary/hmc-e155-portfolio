@@ -13,8 +13,7 @@ module keypad_scanner(
 	logic [3:0] held_col;
 	logic any_key, single_key;
 
-	typedef enum logic [2:0] {SCAN, PRESS, SINGLE_HOLD, MULTI_HOLD_UNSET,
-	                           MULTI_HOLD_SET} statetype;
+	typedef enum logic [1:0] {SCAN, PRESS, HOLD} statetype;
 	statetype state, nextState;
 
 	assign any_key = ~&kp_col;
@@ -27,21 +26,13 @@ module keypad_scanner(
 
 	always_comb
 		case (state)
-			SCAN:              if (single_key)        nextState = PRESS;
-			                   else if (any_key)      nextState = MULTI_HOLD_UNSET;
-			                   else                   nextState = SCAN;
-			PRESS:                                    nextState = SINGLE_HOLD;
-			SINGLE_HOLD:       if (!any_key)          nextState = SCAN;
-			                   else if (!single_key)  nextState = MULTI_HOLD_SET;
-			                   else                   nextState = SINGLE_HOLD;
-			MULTI_HOLD_UNSET:  if (!any_key)          nextState = SCAN;
-			                   else if (single_key)   nextState = PRESS;
-			                   else                   nextState = MULTI_HOLD_UNSET;
-			MULTI_HOLD_SET:    if (!any_key)                              nextState = SCAN;
-			                   else if (single_key && kp_col == held_col) nextState = SINGLE_HOLD;
-			                   else if (single_key)                       nextState = PRESS;
-			                   else                                       nextState = MULTI_HOLD_SET;
-			default:                                  nextState = SCAN;
+			SCAN:  if (single_key)                            nextState = PRESS;
+			       else                                       nextState = SCAN;
+			PRESS:                                            nextState = HOLD;
+			HOLD:  if (!any_key)                              nextState = SCAN;
+			       else if (single_key && kp_col != held_col) nextState = PRESS;
+			       else                                       nextState = HOLD;
+			default:                                          nextState = SCAN;
 		endcase
 
 	always_ff @(posedge clk, posedge rst)

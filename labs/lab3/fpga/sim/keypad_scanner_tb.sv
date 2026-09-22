@@ -206,13 +206,13 @@ module keypad_scanner_tb();
         rst = 0;
 
         // Verify a clean single press captures digit0 and leaves digit1 untouched
-        // 2 cycles after the key resolves (SCAN -> PRESS -> SINGLE_HOLD).
+        // 2 cycles after the key resolves (SCAN -> PRESS -> HOLD).
         @(negedge clk);
         press(0, 0);  // key "1"
         @(posedge clk);
         @(posedge clk);
         #1;
-        assert (dut.state == dut.SINGLE_HOLD && digit0 == 4'h1 && digit1 == 4'h0)
+        assert (dut.state == dut.HOLD && digit0 == 4'h1 && digit1 == 4'h0)
             $display("PASSED! a single clean press captures digit0=1, digit1=0 at time: %0t.", $time);
         else begin
             errors++;
@@ -259,7 +259,8 @@ module keypad_scanner_tb();
                    digit0, digit1, $time);
         end
 
-        // Verify two keys pressed simultaneously in the same row enter MULTI_HOLD_UNSET with no capture
+        // Verify two keys pressed simultaneously in the same row freeze in
+        // SCAN (any_key true, ambiguous, nothing committed yet) with no capture
         @(negedge clk);
         lift(0, 1);
         @(posedge clk);
@@ -268,13 +269,13 @@ module keypad_scanner_tb();
         press(0, 1);
         @(posedge clk);
         #1;
-        assert (dut.state == dut.MULTI_HOLD_UNSET && digit0 == 4'h2 && digit1 == 4'h1)
-            $display("PASSED! simultaneous presses enter MULTI_HOLD_UNSET with no capture at time: %0t.",
+        assert (dut.state == dut.SCAN && dut.any_key && digit0 == 4'h2 && digit1 == 4'h1)
+            $display("PASSED! simultaneous presses freeze in SCAN with no capture at time: %0t.",
                       $time);
         else begin
             errors++;
-            $error("FAILED! state=%s, digit0=%h after simultaneous presses at time: %0t.",
-                   dut.state.name(), digit0, $time);
+            $error("FAILED! state=%s, any_key=%b, digit0=%h after simultaneous presses at time: %0t.",
+                   dut.state.name(), dut.any_key, digit0, $time);
         end
 
         // Verify releasing all but one registers the last held key
@@ -283,7 +284,7 @@ module keypad_scanner_tb();
         @(posedge clk);
         @(posedge clk);
         #1;
-        assert (dut.state == dut.SINGLE_HOLD && digit0 == 4'h2 && digit1 == 4'h2)
+        assert (dut.state == dut.HOLD && digit0 == 4'h2 && digit1 == 4'h2)
             $display("PASSED! releasing to one held key registers it, digit0=2 at time: %0t.", $time);
         else begin
             errors++;
@@ -300,7 +301,7 @@ module keypad_scanner_tb();
         @(posedge clk);
         @(posedge clk);
         #1;
-        assert (digit0 == 4'h3 && dut.state == dut.SINGLE_HOLD)
+        assert (digit0 == 4'h3 && dut.state == dut.HOLD)
             $display("PASSED! key 3 captured cleanly before the add-on test at time: %0t.", $time);
         else begin
             errors++;
@@ -312,7 +313,7 @@ module keypad_scanner_tb();
         press(0, 3);  // add key "A" while "3" is held
         @(posedge clk);
         #1;
-        assert (dut.state == dut.MULTI_HOLD_SET && digit0 == 4'h3)
+        assert (dut.state == dut.HOLD && digit0 == 4'h3)
             $display("PASSED! adding a second key while holding one is ignored at time: %0t.", $time);
         else begin
             errors++;
@@ -326,7 +327,7 @@ module keypad_scanner_tb();
         lift(0, 3);  // release "A", keep "3" held
         @(posedge clk);
         #1;
-        assert (dut.state == dut.SINGLE_HOLD && digit0 == 4'h3 && digit1 == 4'h2)
+        assert (dut.state == dut.HOLD && digit0 == 4'h3 && digit1 == 4'h2)
             $display("PASSED! releasing the added key does not re-capture the original at time: %0t.",
                       $time);
         else begin
@@ -341,7 +342,7 @@ module keypad_scanner_tb();
         press(0, 3);  // add key "A" again while "3" is held
         @(posedge clk);
         #1;
-        assert (dut.state == dut.MULTI_HOLD_SET && digit0 == 4'h3)
+        assert (dut.state == dut.HOLD && digit0 == 4'h3)
             $display("PASSED! re-added key A ahead of the original-release test at time: %0t.", $time);
         else begin
             errors++;
@@ -354,7 +355,7 @@ module keypad_scanner_tb();
         @(posedge clk);
         @(posedge clk);
         #1;
-        assert (dut.state == dut.SINGLE_HOLD && digit0 == 4'hA && digit1 == 4'h3)
+        assert (dut.state == dut.HOLD && digit0 == 4'hA && digit1 == 4'h3)
             $display("PASSED! releasing the original key registers the added one at time: %0t.", $time);
         else begin
             errors++;
@@ -372,12 +373,12 @@ module keypad_scanner_tb();
         press(0, 3);
         @(posedge clk);
         #1;
-        assert (dut.state == dut.MULTI_HOLD_UNSET)
-            $display("PASSED! entered MULTI_HOLD_UNSET ahead of the drop-both test at time: %0t.", $time);
+        assert (dut.state == dut.SCAN && dut.any_key)
+            $display("PASSED! frozen in SCAN, ambiguous, ahead of the drop-both test at time: %0t.", $time);
         else begin
             errors++;
-            $error("FAILED! state=%s ahead of the drop-both test at time: %0t.",
-                   dut.state.name(), $time);
+            $error("FAILED! state=%s, any_key=%b ahead of the drop-both test at time: %0t.",
+                   dut.state.name(), dut.any_key, $time);
         end
 
         @(negedge clk);
