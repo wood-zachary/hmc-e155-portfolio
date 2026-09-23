@@ -11,7 +11,8 @@ module keypad_scanner(
 	logic [24:0] scan_count;
 	logic [3:0] key;
 	logic [3:0] held_col;
-	logic any_key, single_key;
+	logic any_key, single_key, new_col;
+	logic load, scan_en;
 
 	typedef enum logic [1:0] {SCAN, PRESS, HOLD} statetype;
 	statetype state, nextState;
@@ -19,6 +20,7 @@ module keypad_scanner(
 	assign any_key = ~&kp_col;
 	assign single_key = (kp_col == 4'b0111) || (kp_col == 4'b1011) ||
 	                     (kp_col == 4'b1101) || (kp_col == 4'b1110);
+	assign new_col = (kp_col != held_col);
 
 	always_ff @(posedge clk, posedge rst)
 		if (rst) state <= SCAN;
@@ -30,10 +32,13 @@ module keypad_scanner(
 			       else                                       nextState = SCAN;
 			PRESS:                                            nextState = HOLD;
 			HOLD:  if (!any_key)                              nextState = SCAN;
-			       else if (single_key && kp_col != held_col) nextState = PRESS;
+			       else if (single_key && new_col)            nextState = PRESS;
 			       else                                       nextState = HOLD;
 			default:                                          nextState = SCAN;
 		endcase
+
+	assign load    = (state == PRESS);
+	assign scan_en = (state == SCAN) && !any_key;
 
 	always_ff @(posedge clk, posedge rst)
 		if (rst) begin
@@ -41,7 +46,7 @@ module keypad_scanner(
 			digit1   <= 4'b0000;
 			held_col <= 4'b0000;
 		end else begin
-			if (state == PRESS) begin
+			if (load) begin
 				digit0   <= key;
 				digit1   <= digit0;
 				held_col <= kp_col;
@@ -53,7 +58,7 @@ module keypad_scanner(
 	counter #(.WIDTH(25), .MAX(25'd23_999_999)) scan_cnt (
 		.clk(clk),
 		.rst(rst),
-		.en(state == SCAN && !any_key),
+		.en(scan_en),
 		.count(scan_count)
 	);
 

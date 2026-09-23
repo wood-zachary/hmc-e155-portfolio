@@ -8,7 +8,6 @@ module lab3_zw(
 );
 
 	logic int_osc;
-	logic sel;
 	logic [15:0] mux_count;
 	logic [3:0] digit0, digit1, digit_out;
 	logic [3:0] kp_col_sync, kp_col_db;

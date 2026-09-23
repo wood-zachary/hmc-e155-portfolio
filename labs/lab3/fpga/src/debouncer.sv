@@ -15,10 +15,13 @@ module debouncer (
 
 
     logic [19:0] db_count;
+    logic        db_clr;
+
+    assign db_clr = rst || (state == IDLE);
 
     counter #(.WIDTH(20)) db_counter (
         .clk(clk),
-        .rst(rst || (state == IDLE)),
+        .rst(db_clr),
         .en(1'b1),
         .count(db_count)
     );
