@@ -115,16 +115,26 @@ module synchronizer_tb();
             $error("FAILED! data_out=%b after a non-edge-aligned change at time: %0t.", data_out, $time);
         end
 
-        // Verify async reset overrides the synchronizer mid-shift
+        // Verify async reset overrides the synchronizer mid-shift.
         data_in = 1;
-        @(negedge clk);
-        rst = 1;
+        @(posedge clk);
         #1;
-        assert (data_out == 1'b0)
-            $display("PASSED! async reset immediately clears data_out at time: %0t.", $time);
+        assert (dut.sync_regs[0] == 1'b1 && data_out == 1'b0)
+            $display("PASSED! data_in entered the pipeline without reaching data_out yet at time: %0t.", $time);
         else begin
             errors++;
-            $error("FAILED! data_out=%b immediately after async reset at time: %0t.", data_out, $time);
+            $error("FAILED! sync_regs=%b, data_out=%b is not mid-shift at time: %0t.",
+                   dut.sync_regs, data_out, $time);
+        end
+
+        rst = 1;
+        #1;
+        assert (data_out == 1'b0 && dut.sync_regs == '0)
+            $display("PASSED! async reset immediately clears the pipeline mid-shift at time: %0t.", $time);
+        else begin
+            errors++;
+            $error("FAILED! data_out=%b, sync_regs=%b immediately after async reset at time: %0t.",
+                   data_out, dut.sync_regs, $time);
         end
         rst = 0;
 
