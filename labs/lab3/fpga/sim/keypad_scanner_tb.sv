@@ -34,6 +34,7 @@ module keypad_scanner_tb();
     // and which keys a finger is actually holding.
     // key_down[row][col] uses the same left-to-right indexing as EXPECTED_KEY above.
     logic key_down [4][4];
+    logic [24:0] row_cnt_val;
 
     always_comb begin
         kp_col = 4'hF;
@@ -159,7 +160,8 @@ module keypad_scanner_tb();
         end
 
         for (int r = 0; r < 4; r++) begin
-            force dut.scan_cnt.count = ROW_CNT[r];
+            row_cnt_val = ROW_CNT[r];
+            force dut.scan_cnt.count = row_cnt_val;
             // Verify the full {row, col} -> hex decode table combinationally.
             // The row is forced exactly one physical key is held at a time, so
             // kp_col is always a value the real keypad could actually produce.
