@@ -22,28 +22,28 @@ module lab3_zw(
 
 	// Synchronizers for kp_col_async inputs, one per column
 	// kp_col packs 4 independent inputs, so no async FIFO is needed
-	synchronizer sync0 (
+	synchronizer #(.INIT_VAL(1'b1)) sync0 (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.data_in(kp_col_async[0]),
 		.data_out(kp_col_sync[0])
 	);
 
-	synchronizer sync1 (
+	synchronizer #(.INIT_VAL(1'b1)) sync1 (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.data_in(kp_col_async[1]),
 		.data_out(kp_col_sync[1])
 	);
 
-	synchronizer sync2 (
+	synchronizer #(.INIT_VAL(1'b1)) sync2 (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.data_in(kp_col_async[2]),
 		.data_out(kp_col_sync[2])
 	);
 
-	synchronizer sync3 (
+	synchronizer #(.INIT_VAL(1'b1)) sync3 (
 		.clk(int_osc),
 		.rst(~rst_n),
 		.data_in(kp_col_async[3]),
