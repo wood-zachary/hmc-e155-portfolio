@@ -1,6 +1,6 @@
 ldc_set_location -site {43} [get_ports rst_n]
-ldc_set_location -site {12} [get_ports {an_en[0]}]
-ldc_set_location -site {20} [get_ports {an_en[1]}]
+ldc_set_location -site {20} [get_ports {an_en[0]}]
+ldc_set_location -site {12} [get_ports {an_en[1]}]
 ldc_set_location -site {18} [get_ports {seg[0]}]
 ldc_set_location -site {3} [get_ports {seg[1]}]
 ldc_set_location -site {26} [get_ports {seg[2]}]
