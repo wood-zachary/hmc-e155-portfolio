@@ -36,14 +36,14 @@ module keypad_scanner_tb();
     logic key_down [4][4];
     logic [24:0] row_cnt_val;
 
-    always_comb begin
-        kp_col = 4'hF;
-        for (int r = 0; r < 4; r++) begin
-            for (int c = 0; c < 4; c++) begin
-                if (kp_row[r] && key_down[r][c]) kp_col[3 - c] = 1'b0;
-            end
-        end
-    end
+    assign kp_col[3] = ~((kp_row[0] & key_down[0][0]) | (kp_row[1] & key_down[1][0]) |
+                          (kp_row[2] & key_down[2][0]) | (kp_row[3] & key_down[3][0]));
+    assign kp_col[2] = ~((kp_row[0] & key_down[0][1]) | (kp_row[1] & key_down[1][1]) |
+                          (kp_row[2] & key_down[2][1]) | (kp_row[3] & key_down[3][1]));
+    assign kp_col[1] = ~((kp_row[0] & key_down[0][2]) | (kp_row[1] & key_down[1][2]) |
+                          (kp_row[2] & key_down[2][2]) | (kp_row[3] & key_down[3][2]));
+    assign kp_col[0] = ~((kp_row[0] & key_down[0][3]) | (kp_row[1] & key_down[1][3]) |
+                          (kp_row[2] & key_down[2][3]) | (kp_row[3] & key_down[3][3]));
 
     // SytemVerilog has two callable subroutines: function and task.
     // function must return a value and cannot contain any timing control like # or @
