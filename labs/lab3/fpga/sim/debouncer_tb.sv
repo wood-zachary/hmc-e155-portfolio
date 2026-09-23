@@ -53,7 +53,7 @@ module debouncer_tb();
 
         // Verify a bounce (btn_in returns high before confirmation) aborts
         // back to IDLE, discarding whatever progress had accumulated
-        force dut.db_counter.count = 20'd400_000;
+        force dut.db_counter.count = 20'd524_287;  // 2^19 - 1
         @(negedge clk);
         btn_in = 1;
         @(posedge clk);
