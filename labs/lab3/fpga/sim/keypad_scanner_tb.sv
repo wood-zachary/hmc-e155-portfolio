@@ -35,6 +35,7 @@ module keypad_scanner_tb();
     // key_down[row][col] uses the same left-to-right indexing as EXPECTED_KEY above.
     logic key_down [4][4];
     logic [24:0] row_cnt_val;
+    logic [24:0] held_scan_count;
 
     // kp_row's bit order is reversed from row index: kp_row=4'b1000 (bit 3)
     // is row 0 and kp_row=4'b0001 (bit 0) is row 3
@@ -225,17 +226,18 @@ module keypad_scanner_tb();
         end
 
         // Verify a long hold registers exactly once: kp_row/scan_count
-        // stay frozen and digit0 never changes again across hundreds of cycles
+        // stay frozen and digit0 never changes again across hundreds of cycles.
+        held_scan_count = dut.scan_count;
         repeat (200) @(posedge clk);
         #1;
-        assert (kp_row == 4'b1000 && dut.scan_count == 25'd0 &&
+        assert (kp_row == 4'b1000 && dut.scan_count == held_scan_count &&
                 digit0 == 4'h1 && digit1 == 4'h0)
             $display("PASSED! a 200-cycle hold still registers key 1 exactly once at time: %0t.",
                       $time);
         else begin
             errors++;
-            $error("FAILED! kp_row=%b, scan_count=%0d, digit0=%h drifted while held at time: %0t.",
-                   kp_row, dut.scan_count, digit0, $time);
+            $error("FAILED! kp_row=%b, scan_count=%0d (expected %0d), digit0=%h drifted while held at time: %0t.",
+                   kp_row, dut.scan_count, held_scan_count, digit0, $time);
         end
 
         // Release, then press a second key: verify digit0/digit1 shift
