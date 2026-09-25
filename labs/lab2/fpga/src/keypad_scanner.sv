@@ -19,6 +19,6 @@ module keypad_scanner(
 	assign kp_row = (scan_count < 25'd6_000_000)  ? 4'b1000 :
 	                (scan_count < 25'd12_000_000) ? 4'b0100 :
 	                (scan_count < 25'd18_000_000) ? 4'b0010 :
-	                                                 4'b0001;
+	                                                4'b0001;
 
 endmodule
