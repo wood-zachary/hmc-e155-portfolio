@@ -2,6 +2,7 @@
 title: "Lab 3: Keypad Scanner"
 author: "Zachary Wood"
 date: "9/23/26"
+image: images/lab3_top_level_block_diagram.png
 categories:
   - labreport
 draft: false
@@ -103,11 +104,19 @@ Figure 3 shows the top-level architecture of `lab3_zw`. `HSOSC` generates `int_o
 
 ![Figure 3: Block diagram of the `lab3_zw` SystemVerilog design.](images/lab3_top_level_block_diagram.png)
 
+Figure 4 shows `keypad_scanner`. A four-input NAND of `kp_col` produces `any_key`, four equality comparators feeding an OR gate produce `single_key`, and an inequality comparator against the `held_col` register produces `new_col`. These drive the FSM's next state logic, and equality comparators on `state` generate `load` and `scan_en`. `scan_en` enables `scan_cnt`, whose count is compared against the three row boundaries to select `kp_row[3:0]` through a chain of multiplexers. The key decode logic combines `kp_row` and `kp_col` into `key`, which `load` shifts into the `digit0` and `digit1` registers.
+
+![Figure 4: Block diagram of the `keypad_scanner` SystemVerilog module.](images/lab3_keypad_scanner_block_diagram.png)
+
+Figure 5 shows `debouncer`. The FSM's next state logic uses `btn_in` and bit 19 of `db_count`. `db_clr`, the OR of `rst` and an equality comparison of `state` against IDLE, resets `db_counter`, whose enable is tied high, and `btn_out` is the inverted equality comparison of `state` against PRESSED.
+
+![Figure 5: Block diagram of the `debouncer` SystemVerilog module.](images/lab3_decouncer_block_diagram.png)
+
 ### Schematic
 
-Figure 4 shows the schematic of the physical circuit. The display and keypad circuitry are unchanged from lab 2: each digit's common anode is driven by a 2N3906 PNP transistor with an $820\ \Omega$ base resistor, each shared segment cathode has a $330\ \Omega$ current-limiting resistor, and each keypad row is driven through a 2N3904 NPN transistor wired as an open-collector output. The columns are read through the FPGA's internal pull-ups, set to $3.3\text{ k}\Omega$ (`PULLMODE=3P3K`) in the pin constraints. On-board components are documented in the [development board schematic](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf).
+Figure 6 shows the schematic of the physical circuit. The display and keypad circuitry are unchanged from lab 2: each digit's common anode is driven by a 2N3906 PNP transistor with an $820\ \Omega$ base resistor, each shared segment cathode has a $330\ \Omega$ current-limiting resistor, and each keypad row is driven through a 2N3904 NPN transistor wired as an open-collector output. The columns are read through the FPGA's internal pull-ups, set to $3.3\text{ k}\Omega$ (`PULLMODE=3P3K`) in the pin constraints. On-board components are documented in the [development board schematic](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf).
 
-![Figure 4: Schematic of the physical circuit.](images/lab3_schematic.png)
+![Figure 6: Schematic of the physical circuit.](images/lab3_schematic.png)
 
 #### Calculations
 
@@ -123,7 +132,12 @@ $$t_{db} = \frac{2^{19}}{48\times10^6\text{ Hz}} \approx 10.9\text{ ms}$$
 
 ### Synthesis Results
 
-<!-- TODO: synthesizer output?? -->
+Figure 7 shows the area report from the Lattice Synthesis Engine. All 156 register bits are implemented as `FD1P3XZ` D flip-flops. The only I/O buffers are 5 input buffers (`IB`) and 13 output buffers (`OB`), one per port bit, so the design contains no latches and no tristate buffers.
+
+::: {.callout-note collapse="true"}
+## Synthesis output (click to expand)
+![Figure 7: Lattice Synthesis Engine area report for `lab3_zw`.](images/lab3_synthesis_output.png)
+:::
 
 ## Results and Discussion
 
@@ -133,28 +147,28 @@ The main limitation of the design is the 2 Hz scan rate carried over from lab 2.
 
 ### Testbench Simulation
 
-Figures 5 through 7 show the synchronizer, debouncer, and keypad scanner testbenches. Figure 8 shows the top-level testbench, and Figure 9 zooms in on the end of the top-level simulation. The counter and seven-segment decoder simulations were not repeated, since those modules were verified in [lab 1](../lab1/lab1.qmd).
+Figures 8 through 10 show the synchronizer, debouncer, and keypad scanner testbenches. Figure 11 shows the top-level testbench, and Figure 12 zooms in on the end of the top-level simulation. The counter and seven-segment decoder simulations were not repeated, since those modules were verified in [lab 1](../lab1/lab1.qmd).
 
 ::: {.callout-note collapse="true"}
 ## Synchronizer testbench (click to expand)
-![Figure 5: QuestaSim waveform for `synchronizer_tb`, showing the two-cycle latency for rising, falling, and edge-aligned inputs, and an asynchronous reset in the middle of a shift.](images/lab3_synchronizer_tb_waveform.png)
+![Figure 8: QuestaSim waveform for `synchronizer_tb`, showing the two-cycle latency for rising, falling, and edge-aligned inputs, and an asynchronous reset in the middle of a shift.](images/lab3_synchronizer_tb_waveform.png)
 :::
 
 ::: {.callout-note collapse="true"}
 ## Debouncer testbench (click to expand)
-![Figure 6: QuestaSim waveform for `debouncer_tb`, showing the IDLE, WAIT, and PRESSED transitions, a bounce returning to IDLE, confirmation at the debounce threshold, recovery from the unused state, and an asynchronous reset.](images/lab3_debouncer_tb_waveform.png)
+![Figure 9: QuestaSim waveform for `debouncer_tb`, showing the IDLE, WAIT, and PRESSED transitions, a bounce returning to IDLE, confirmation at the debounce threshold, recovery from the unused state, and an asynchronous reset.](images/lab3_debouncer_tb_waveform.png)
 :::
 
 ::: {.callout-note collapse="true"}
 ## Keypad scanner testbench (click to expand)
-![Figure 7: QuestaSim waveform for `keypad_scanner_tb`, showing the row boundaries, all 16 decodes, a long hold, and the multiple-key cases.](images/lab3_keypad_scanner_tb_waveform.png)
+![Figure 10: QuestaSim waveform for `keypad_scanner_tb`, showing the row boundaries, all 16 decodes, a long hold, and the multiple-key cases.](images/lab3_keypad_scanner_tb_waveform.png)
 :::
 
-![Figure 8: QuestaSim waveform for `lab3_zw_tb`, showing a bounced, asynchronous press of key 1 propagating to `seg`, followed by a press of key 2.](images/lab3_top_tb_waveform.png)
+![Figure 11: QuestaSim waveform for `lab3_zw_tb`, showing a bounced, asynchronous press of key 1 propagating to `seg`, followed by a press of key 2.](images/lab3_top_tb_waveform.png)
 
 ::: {.callout-note collapse="true"}
 ## Top-level testbench, zoomed (click to expand)
-![Figure 9: Zoomed view of `lab3_zw_tb`, showing key 2 reaching `seg` during digit 0's phase, followed by the asynchronous reset.](images/lab3_top_tb_waveform_zoomed.png)
+![Figure 12: Zoomed view of `lab3_zw_tb`, showing key 2 reaching `seg` during digit 0's phase, followed by the asynchronous reset.](images/lab3_top_tb_waveform_zoomed.png)
 :::
 
 ## Conclusion
@@ -163,7 +177,7 @@ The design scanned the 4x4 keypad, synchronized and debounced its inputs, and di
 
 ::: {.callout-note collapse="true"}
 ## Hours spent (click to expand)
-I spent about 20 hours on this lab. For instructor refence, I spent  7 hours writing designing modules, 5 hours simulating my modules, 3 hours refactoring and debugging hardware, 3 hours on drawings (schematic, block diagram, FSMs), and 2 hours on the lab report
+I spent about 22 hours on this lab. For instructor refence, I spent  7 hours writing designing modules, 5 hours simulating my modules, 3 hours refactoring and debugging hardware, 4 hours on drawings (schematic, block diagram, FSMs), and 3 hours on the lab report
 :::
 
 ## AI Prototype Summary
