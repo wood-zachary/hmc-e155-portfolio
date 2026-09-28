@@ -43,7 +43,8 @@ reading and writing fantasy and science fiction, or studying Mandarin.
   </a>
 
   <a class="proj-card" href="projects.html#riscv">
-    <div class="proj-icon" aria-hidden="true"><i class="bi bi-cpu"></i></div>
+    <img class="proj-img" src="images/e85_riscv.png"
+         alt="Block diagram of the multicycle RISC-V controller and datapath">
     <div class="proj-label">
       <p class="proj-context">Coursework</p>
       <p class="proj-name">Multicycle RISC-V Processor</p>
@@ -51,9 +52,8 @@ reading and writing fantasy and science fiction, or studying Mandarin.
   </a>
 
   <a class="proj-card" href="experience.html#ace-lab">
-    <div class="proj-icon" aria-hidden="true">
-      <i class="bi bi-activity"></i>
-    </div>
+    <img class="proj-img" src="images/ace_epg.png"
+         alt="EPG sensor board on a lab bench beside a live waveform display">
     <div class="proj-label">
       <p class="proj-context">ACE Lab</p>
       <p class="proj-name">EPG Sensor Firmware</p>
@@ -61,9 +61,8 @@ reading and writing fantasy and science fiction, or studying Mandarin.
   </a>
 
   <a class="proj-card" href="experience.html#sand-lab">
-    <div class="proj-icon" aria-hidden="true">
-      <i class="bi bi-lightning-charge"></i>
-    </div>
+    <img class="proj-img" src="images/sand-pca.png"
+         alt="PCA plot of web traffic classes by requested content type">
     <div class="proj-label">
       <p class="proj-context">SAND Lab</p>
       <p class="proj-name">Bot Traffic Energy Analysis</p>
@@ -71,7 +70,8 @@ reading and writing fantasy and science fiction, or studying Mandarin.
   </a>
 
   <a class="proj-card" href="projects.html#rov">
-    <div class="proj-icon" aria-hidden="true"><i class="bi bi-water"></i></div>
+    <img class="proj-img" src="images/e79_labview.png"
+         alt="LabVIEW block diagram of the ROV position control loop">
     <div class="proj-label">
       <p class="proj-context">Coursework</p>
       <p class="proj-name">Submersible ROV</p>
