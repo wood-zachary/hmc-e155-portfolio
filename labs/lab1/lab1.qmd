@@ -9,7 +9,7 @@ draft: false
 
 ## Introduction
 
-The goal of this lab was to become familiarized with the microcontroller unit (MCU) and field-programmable gate array (FPGA) used this semester. I assembled a [development board](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf) containing a [Nucleo-L432KC MCU](https://hmc-e155.github.io/assets/doc/ds11451-stm32l432kc.pdf) and an [UPduino v3.1](https://upduino.readthedocs.io/en/latest/index.html#) Lattice iCE40UP5K FPGA development board, wrote and verified SystemVerilog modules to control three on-board LEDs and an external 7-segment display using four on-board DIP switches, and programmed the FPGA with my synethsised design.
+The goal of this lab was to become familiarized with the microcontroller unit (MCU) and field-programmable gate array (FPGA) used this semester. I assembled a [development board](https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf) containing a [Nucleo-L432KC MCU](https://hmc-e155.github.io/assets/doc/ds11451-stm32l432kc.pdf) and an [UPduino v3.1](https://upduino.readthedocs.io/en/latest/index.html#) Lattice iCE40UP5K FPGA development board, wrote and verified SystemVerilog modules to control three on-board LEDs and an external 7-segment display using four on-board DIP switches, and programmed the FPGA with my synthesized design.
 
 ## Design and Testing Methodology
 
@@ -42,7 +42,7 @@ The source code for the project can be found in the associated [Github repositor
 
 ### Block Diagram
 
-Figure 1 shows the block diagram of the design. The top-level module `lab1_zw` includes three submodules: the high-speed oscillator (`hf_osc`, an `HSOSC` primitive), a counter (`cnt`) used as divide the clock, and a seven-segment decoder (`sev_seg_dec`). `rst_n` is inverted before driving the counter's active-high `rst` port, and the counter's `en` is tied high so it runs continuously. The counter's 25-bit output `q` is compared against `25'd10,000,000` to produce an approximately 50% duty 2.4 Hz square wave on `led[2]`. `led[0]` and `led[1]` are generated directly from `s[3:0]` with an XOR and AND gate respectively, and `s[3:0]` is also passed to the decoder to produce `seg[6:0]`.
+Figure 1 shows the block diagram of the design. The top-level module `lab1_zw` includes three submodules: the high-speed oscillator (`hf_osc`, an `HSOSC` primitive), a counter (`cnt`) used to divide the clock, and a seven-segment decoder (`sev_seg_dec`). `rst_n` is inverted before driving the counter's active-high `rst` port, and the counter's `en` is tied high so it runs continuously. The counter's 25-bit output `q` is compared against `25'd10,000,000` to produce an approximately 50% duty 2.4 Hz square wave on `led[2]`. `led[0]` and `led[1]` are generated directly from `s[3:0]` with an XOR and AND gate respectively, and `s[3:0]` is also passed to the decoder to produce `seg[6:0]`.
 
 ![Figure 1: Block diagram of the `lab1_zw` SystemVerilog design.](images/lab1_block_diagram.jpg)
 

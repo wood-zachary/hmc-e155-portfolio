@@ -8,7 +8,7 @@ categories:
 
 ## Introduction
 
-The goal of this lab was to learn how to use time multiplexing to efficiently use the I/O on an FPGA. I Implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins, built a simple transistor circuit to drive large currents from the FPGA pins, and installed a keypad and verified that logic signals can pass through it.
+The goal of this lab was to learn how to use time multiplexing to efficiently use the I/O on an FPGA. I implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins, built a simple transistor circuit to drive large currents from the FPGA pins, and installed a keypad and verified that logic signals can pass through it.
 
 ## Design and Testing Methodology
 
@@ -60,7 +60,7 @@ $$I_B = \frac{V_{DD} - V_{BE(on)}}{R_B} = \frac{3.3\text{ V} - 0.7\text{ V}}{820
 
 well under the FPGA's 8 mA maximum.
 
-**Multiplexing and scanning rates.** `HSOSC` defaults to 48 MHz. The mux counter (`MAX = 16'd47_999`) toggles digits every 24,000 cycles, resulting in a 1 kHz toggle rate between digits. The scan counter (`MAX = 25'd23_999_999`) asserts each row for 6,000,000 of 24,000,000 cycles, resulting in a 2 Hz toggle rate across all 4 rows.
+**Multiplexing and scanning rates.** `HSOSC` defaults to 48 MHz. The mux counter (`MAX = 16'd47_999`) toggles digits every 24,000 cycles, resulting in a 2 kHz toggle rate between digits, or a 1 kHz refresh rate for each digit. The scan counter (`MAX = 25'd23_999_999`) asserts each row for 6,000,000 of 24,000,000 cycles, resulting in a 2 Hz toggle rate across all 4 rows.
 
 ## Results and Discussion
 

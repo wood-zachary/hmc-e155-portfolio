@@ -126,7 +126,7 @@ Figure 6 shows the schematic of the physical circuit. The display and keypad cir
 
 $$t_{db} = \frac{2^{19}}{48\times10^6\text{ Hz}} \approx 10.9\text{ ms}$$
 
-**Scan and multiplexing rates.** As in lab 2, the scan counter (`MAX = 25'd23_999_999`) asserts each row for 6,000,000 cycles (125 ms), cycling through all four rows at 2 Hz, and the multiplexing counter (`MAX = 16'd47_999`) toggles the active digit every 24,000 cycles, resulting in a 1 kHz toggle rate between digits.
+**Scan and multiplexing rates.** As in lab 2, the scan counter (`MAX = 25'd23_999_999`) asserts each row for 6,000,000 cycles (125 ms), cycling through all four rows at 2 Hz, and the multiplexing counter (`MAX = 16'd47_999`) toggles the active digit every 24,000 cycles, resulting in a 2 kHz toggle rate between digits, or a 1 kHz refresh rate for each digit.
 
 ### Synthesis Results
 
