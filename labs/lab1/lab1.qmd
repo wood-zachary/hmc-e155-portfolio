@@ -5,6 +5,13 @@ date: "9/9/26"
 categories:
   - labreport
 draft: false
+image: images/lab1_assembled_board.JPEG
+description: >-
+  Assembled the course development board and wrote SystemVerilog to
+  drive LEDs and a seven-segment display from DIP switches, including a
+  2.4 Hz blink derived from the FPGA's 48 MHz internal oscillator.
+aliases:
+  - /hmc-e155-portfolio/labs/lab1/lab1.html
 ---
 
 ## Introduction

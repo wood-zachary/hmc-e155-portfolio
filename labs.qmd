@@ -1,8 +1,19 @@
 ---
-title: "E155 Labs"
+title: "Microprocessor-Based Systems Labs"
+aliases:
+  - /hmc-e155-portfolio/labs.html
 listing:
   contents: labs
   sort: "date desc"
   type: default
   categories: false
 ---
+
+Lab reports from Harvey Mudd's Microprocessor-Based Systems: Design and
+Applications (ENGR155), taught by Profs. Josh Brake and Matt Spencer in Fall
+2026. The labs build systems on a Lattice iCE40UP5K FPGA (UPduino v3.1) and
+an STM32L432KC microcontroller (Nucleo-L432KC), with RTL design in
+SystemVerilog, simulation in QuestaSim, synthesis in Lattice Radiant, and
+embedded C in SEGGER Embedded Studio. Later labs cover digital audio,
+interrupts, SPI and the Internet of Things, and an AES hardware accelerator,
+and the semester ends with a team-designed FPGA and microcontroller project.

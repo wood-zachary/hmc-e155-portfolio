@@ -1,15 +1,82 @@
 ---
-title: "E155 Portfolio"
+title: "Zachary Wood"
 image: images/headshot.jpg
+aliases:
+  - /hmc-e155-portfolio/index.html
 about:
-    template: jolla
-    links:
-        - icon: linkedin
-          text: LinkedIn
-          href: https://www.linkedin.com/in/zwoodhmc/
-        - icon: github
-          text: GitHub
-          href: https://github.com/wood-zachary
+  template: jolla
+  links:
+    - icon: envelope-fill
+      text: Email
+      href: mailto:zwood@hmc.edu
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/zwoodhmc/
+    - icon: github
+      text: GitHub
+      href: https://github.com/wood-zachary
 ---
 
-Zachary Wood is a junior computer science major at [Harvey Mudd College](https://hmc.edu). Their academic and career interests are in the field of computer engineering, particularly FPGA and digital circuit design and verification, computer architecture for CPUs and GPUs, and analog circuit design for sensors and mixed-signal ASICs. They are a member of the Harvey Mudd Analog Circuit Engineering lab, headed by [Matthew Spencer](https://www.hmc.edu/engineering/matthew-spencer/), and the Harvey Mudd Sustainability and Network Design Lab, headed by [Arthi Padmanabhan](https://artpad6.github.io/). Outside of working on things related to computer engineering, they can be found bouldering, reading/writing fantasy or science fiction, or studying Mandarin before studying abroad in Shanghai. 
+Zachary Wood is a junior computer science major at
+[Harvey Mudd College](https://hmc.edu). Their academic and career interests
+are in computer engineering, particularly FPGA and digital circuit design and
+verification, computer architecture for CPUs and GPUs, and analog circuit
+design for sensors and mixed-signal ASICs. They are a member of the Harvey
+Mudd Analog Circuit Engineering (ACE) Lab, headed by
+[Matthew Spencer](https://www.hmc.edu/engineering/matthew-spencer/), and the
+Harvey Mudd Sustainability and Network Design (SAND) Lab, headed by
+[Arthi Padmanabhan](https://artpad6.github.io/). Outside of computer
+engineering, they can be found bouldering, practicing Brazilian Jiu-Jitsu,
+reading and writing fantasy and science fiction, or studying Mandarin.
+
+---
+
+```{=html}
+<div class="proj-grid">
+  <a class="proj-card" href="labs.html">
+    <img class="proj-img" src="labs/lab1/images/lab1_assembled_board.JPEG"
+         alt="Assembled development board with an FPGA and a microcontroller">
+    <div class="proj-label">
+      <p class="proj-context">Coursework</p>
+      <p class="proj-name">Microprocessor Systems Labs</p>
+    </div>
+  </a>
+
+  <a class="proj-card" href="projects.html#riscv">
+    <div class="proj-icon" aria-hidden="true"><i class="bi bi-cpu"></i></div>
+    <div class="proj-label">
+      <p class="proj-context">Coursework</p>
+      <p class="proj-name">Multicycle RISC-V Processor</p>
+    </div>
+  </a>
+
+  <a class="proj-card" href="experience.html#ace-lab">
+    <div class="proj-icon" aria-hidden="true">
+      <i class="bi bi-activity"></i>
+    </div>
+    <div class="proj-label">
+      <p class="proj-context">ACE Lab</p>
+      <p class="proj-name">EPG Sensor Firmware</p>
+    </div>
+  </a>
+
+  <a class="proj-card" href="experience.html#sand-lab">
+    <div class="proj-icon" aria-hidden="true">
+      <i class="bi bi-lightning-charge"></i>
+    </div>
+    <div class="proj-label">
+      <p class="proj-context">SAND Lab</p>
+      <p class="proj-name">Bot Traffic Energy Analysis</p>
+    </div>
+  </a>
+
+  <a class="proj-card" href="projects.html#rov">
+    <div class="proj-icon" aria-hidden="true"><i class="bi bi-water"></i></div>
+    <div class="proj-label">
+      <p class="proj-context">Coursework</p>
+      <p class="proj-name">Submersible ROV</p>
+    </div>
+  </a>
+
+</div>
+```

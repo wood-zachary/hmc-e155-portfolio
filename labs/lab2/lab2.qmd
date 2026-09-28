@@ -4,6 +4,13 @@ author: "Zachary Wood"
 date: "9/16/26"
 categories:
   - labreport
+image: images/lab2_block_diagram.png
+description: >-
+  Time-multiplexed one seven-segment decoder across two digits at a
+  1 kHz per-digit refresh, with PNP transistors driving the digit
+  anodes and NPN open-collector drivers on the keypad rows.
+aliases:
+  - /hmc-e155-portfolio/labs/lab2/lab2.html
 ---
 
 ## Introduction

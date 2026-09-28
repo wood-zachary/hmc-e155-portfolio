@@ -6,6 +6,13 @@ image: images/lab3_top_level_block_diagram.png
 categories:
   - labreport
 draft: false
+description: >-
+  Synchronized and debounced a 4x4 keypad's inputs and designed a
+  scanner FSM that registers each press once, handles multiple
+  simultaneous presses, and shows the last two keys on a multiplexed
+  display.
+aliases:
+  - /hmc-e155-portfolio/labs/lab3/lab3.html
 ---
 
 ## Introduction

@@ -1,0 +1,84 @@
+---
+title: "Research and Work Experience"
+---
+
+## Research
+
+### Analog Circuit Engineering (ACE) Lab {#ace-lab}
+
+[Harvey Mudd College, Department of Engineering | March 2026 - Present |
+Advisor: Prof. Matthew Spencer]{.entry-meta}
+
+The ACE Lab is building a compact, low-power, research-grade
+electropenetrograph (EPG) sensor for research on insect feeding behavior. The
+team is split into analog, firmware, and software subteams. I am on the
+firmware team, where I write and debug C firmware for the version of the
+sensor built on a Nordic nRF development kit, primarily resolving
+communication issues between the analog front end and the host software.
+
+My current work covers:
+
+- Stabilizing the Bluetooth Low Energy (BLE) link to a custom host
+  application over the Nordic UART Service, and posting control-loop state and
+  compressed waveform data back to the host.
+- Replacing an external signal-generator chip with direct digital synthesis
+  (DDS) in firmware.
+- Adding configurable time-averaged (chopped) input-resistance (Ri)
+  measurement.
+- Characterizing and reducing the sensor's power consumption, with a target
+  reduction of over 90%.
+
+**Skills:** C, Zephyr RTOS, nRF Connect SDK, BLE (Nordic UART Service),
+direct digital synthesis
+
+### Sustainability and Network Design (SAND) Lab {#sand-lab}
+
+[Harvey Mudd College, Department of Computer Science | May 2026 - Present |
+Advisor: Prof. Arthi Padmanabhan]{.entry-meta}
+
+This project measures the energy consumption and carbon-equivalent emissions
+that LLM crawlers and other bot traffic add to a web server. Over 700,000
+requests from historical server logs are classified by source, such as
+crawlers, scrapers, cloud providers, and residential users, and replayed
+against a Raspberry Pi web server running Apache with TWiki and WordPress
+while a USB power meter records its power draw. Scheduled replays are then
+compared against grid carbon-intensity data to estimate how shifting traffic
+in time changes emissions. I write Python and Bash tooling on Linux for the
+measurement and analysis pipeline. A paper on the results is in preparation.
+
+**Skills:** Python, Bash, Linux, Raspberry Pi, Apache, power measurement,
+carbon-intensity analysis
+
+### Computing for All Lab {#cal-lab}
+
+[Harvey Mudd College, Department of Computer Science | May 2025 - July
+2025]{.entry-meta}
+
+Led development of a microcontroller programming curriculum (Arduino,
+CircuitPython) that introduces about 170 students each year to embedded
+systems and sensor integration. Co-developed revised units on introductory
+Python, circuit design, and assembly.
+
+**Skills:** Arduino, CircuitPython, curriculum design
+
+## Work
+
+### Tutor and Grader {#tutor}
+
+[Harvey Mudd College, Department of Computer Science | August 2025 -
+Present]{.entry-meta}
+
+Tutor students and grade assignments for introductory computer science
+(about 170 students), applying the curriculum developed in the Computing for
+All Lab.
+
+### Backend Developer, Code the Change {#code-the-change}
+
+[December 2024 - April 2026]{.entry-meta}
+
+Led backend development (Node.js, Express, MongoDB) for two client websites
+built on the MERN stack: an educational site for the Museum of Science in
+collaboration with MIT, and a scholarship platform for the Children's
+Foundation of America.
+
+**Skills:** Node.js, Express, MongoDB

@@ -1,6 +1,8 @@
 # Rendered materials + misc.
 /.quarto/
 /_site/
+/site_libs/
+*-listing.json
 Thumbs.db
 .svlint.toml
 
