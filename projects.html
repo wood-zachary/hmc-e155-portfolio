@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -267,24 +267,24 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html"> 
-<span class="menu-text">Research</span></a>
+    <a class="nav-link" href="./experience.html"> 
+<span class="menu-text">Experience</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./projects.html" aria-current="page"> 
-<span class="menu-text">Course Projects</span></a>
+<span class="menu-text">Class Projects</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./labs.html"> 
-<span class="menu-text">E155 FPGA+MCU Labs</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
-<span class="menu-text">Resources</span></a>
+<span class="menu-text">Microprocessor Labs</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./blog.html"> 
 <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -310,7 +310,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#e155" id="toc-e155" class="nav-link active" data-scroll-target="#e155">Microprocessor-Based Systems Labs</a></li>
+  <li><a href="#riscv" id="toc-riscv" class="nav-link" data-scroll-target="#riscv">Multicycle RISC-V Processor</a></li>
+  <li><a href="#e85-labs" id="toc-e85-labs" class="nav-link" data-scroll-target="#e85-labs">FPGA State Machine and Keyboard Labs</a></li>
+  <li><a href="#rov" id="toc-rov" class="nav-link" data-scroll-target="#rov">Submersible ROV</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -334,127 +345,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="digital-electronics-and-computer-engineering-e85" class="level2">
-<h2 class="anchored" data-anchor-id="digital-electronics-and-computer-engineering-e85">Digital Electronics and Computer Engineering (E85)</h2>
-<section id="e85-multicycle-risc-v-processor" class="level3">
-<h3 class="anchored" data-anchor-id="e85-multicycle-risc-v-processor">E85: Multicycle RISC-V Processor</h3>
-<script>
-  function toggleE85() {
-    var content = document.getElementById("moreContentE85");
-    var button = document.getElementById("toggleButtonE85");
-    if (content.style.display === "none") {
-      content.style.display = "block";
-      button.innerHTML = "Show Less";
-    } else {
-      content.style.display = "none";
-      button.innerHTML = "Show More";
-    }
-  }
-</script>
-
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px; margin-bottom: 1em;">
-  <div style="flex: 2; width: 300px;">
-    <img src="https://placehold.co/400x300?text=Multicycle+RISC-V+Processor" alt="Multicycle RISC-V Processor" style="width:100%; border-radius: 15px;">
-  </div>
-  <div style="flex: 2; min-width: 300px;">
-    <p class="justify-text">
-      <strong>Overview:</strong><br>
-      Designed and verified a multicycle RISC-V processor supporting roughly 30 instructions in SystemVerilog, building the design bottom-up from individual modules to the control FSM to the full datapath. Wrote unit tests for every module before integration, then validated the complete processor against a system-level assembly program, confirming correct register values through waveform analysis in QuestaSim. The incremental test strategy meant the design passed system-level verification cleanly, with no bugs surfacing after integration.
-    </p>
-    <p><strong>Skills:</strong><br>SystemVerilog, RISC-V ISA, Finite State Machines, QuestaSim, Waveform-Based Verification</p>
-    <button id="toggleButtonE85" class="toggle-btn" onclick="toggleE85()">Show More</button>
-  </div>
-</div>
-
-<div id="moreContentE85" style="display:none;">
-  <div class="row">
-    <div class="column">
-      <strong>Design</strong>
-      <img src="https://placehold.co/400x300?text=Datapath+%2B+FSM" alt="Design">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Built the processor bottom-up: individual modules first, then the control finite-state machine, then the full datapath connecting controller, memory, and register file.
-      </div>
-    </div>
-    <div class="column">
-      <strong>Verification</strong>
-      <img src="https://placehold.co/400x300?text=QuestaSim+Waveforms" alt="Verification">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Wrote unit tests for every module before integration, then validated the complete processor against a system-level assembly program with waveform analysis in QuestaSim.
-      </div>
-    </div>
-    <div class="column">
-      <strong>Result</strong>
-      <img src="https://placehold.co/400x300?text=Clean+Integration" alt="Result">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Confirmed correct register values at every stage; the incremental, unit-tested design strategy meant no bugs surfaced after integration. (Simulated in QuestaSim; not synthesized to physical FPGA hardware.)
-      </div>
-    </div>
-  </div>
-</div>
-<p>Also in E85 lab work: an LED-driving finite state machine and a four-key digital music keyboard that played notes through an amplified speaker.</p>
-<hr>
+<section id="e155" class="level2">
+<h2 class="anchored" data-anchor-id="e155">Microprocessor-Based Systems Labs</h2>
+<p><span class="entry-meta">Microprocessor-Based Systems: Design and Applications (ENGR155) | Fall 2026</span></p>
+<p>FPGA and microcontroller labs on a Lattice iCE40UP5K FPGA and an STM32L432KC microcontroller, each documented in a full lab report. See the <a href="./labs.html">lab reports</a>.</p>
 </section>
+<section id="riscv" class="level2">
+<h2 class="anchored" data-anchor-id="riscv">Multicycle RISC-V Processor</h2>
+<p><span class="entry-meta">Digital Electronics and Computer Engineering (ENGR85) | Spring 2026</span></p>
+<p>Designed a multicycle RISC-V processor in SystemVerilog that supports about 30 instructions. I built it bottom-up: the individual modules first, then the control path and its finite state machine, then the datapath. Each module has its own unit testbench, and the complete processor was verified in QuestaSim by running a system-level assembly program and checking register values in the waveforms.</p>
+<p><strong>Skills:</strong> SystemVerilog, RISC-V, finite state machines, QuestaSim</p>
 </section>
-<section id="linear-lti-systems-e79" class="level2">
-<h2 class="anchored" data-anchor-id="linear-lti-systems-e79">Linear (LTI) Systems (E79)</h2>
-<section id="e79-submersible-rov" class="level3">
-<h3 class="anchored" data-anchor-id="e79-submersible-rov">E79: Submersible ROV</h3>
-<script>
-  function toggleE79() {
-    var content = document.getElementById("moreContentE79");
-    var button = document.getElementById("toggleButtonE79");
-    if (content.style.display === "none") {
-      content.style.display = "block";
-      button.innerHTML = "Show Less";
-    } else {
-      content.style.display = "none";
-      button.innerHTML = "Show More";
-    }
-  }
-</script>
-
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px; margin-bottom: 1em;">
-  <div style="flex: 2; width: 300px;">
-    <img src="https://placehold.co/400x300?text=Submersible+ROV" alt="Submersible ROV" style="width:100%; border-radius: 15px;">
-  </div>
-  <div style="flex: 2; min-width: 300px;">
-    <p class="justify-text">
-      <strong>Overview:</strong><br>
-      Built a submersible remotely operated vehicle (ROV) with a 2-person team to record temperature and pressure at depth. Designed and analyzed the sensor-interface RLC circuits, assembled the ROV's PVC frame, calibrated a thermistor for temperature and a pressure sensor for depth, and implemented a PID control loop in LabVIEW, derived from a Laplace-transform analysis of the system, to control dive depth. Data was collected via a National Instruments myDAQ.
-    </p>
-    <p><strong>Skills:</strong><br>LabVIEW, PID Control, RLC Circuit Design and Analysis, Sensor Calibration, myDAQ</p>
-    <button id="toggleButtonE79" class="toggle-btn" onclick="toggleE79()">Show More</button>
-  </div>
-</div>
-
-<div id="moreContentE79" style="display:none;">
-  <div class="row">
-    <div class="column">
-      <strong>Sensor Circuits</strong>
-      <img src="https://placehold.co/400x300?text=RLC+Sensor+Circuits" alt="Sensor circuits">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Designed and analyzed RLC interface circuits for a thermistor (temperature) and a pressure sensor (depth), calibrating each against known references.
-      </div>
-    </div>
-    <div class="column">
-      <strong>Control</strong>
-      <img src="https://placehold.co/400x300?text=PID+in+LabVIEW" alt="Control">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Derived the system's dynamics via Laplace-transform analysis and implemented a PID control loop in LabVIEW to hold dive depth.
-      </div>
-    </div>
-    <div class="column">
-      <strong>Assembly &amp; Data</strong>
-      <img src="https://placehold.co/400x300?text=PVC+Frame+Assembly" alt="Assembly">
-      <div style="padding: 5px; font-size: 0.8rem;">
-        - Assembled the ROV's PVC frame and collected live sensor data through a National Instruments myDAQ during dives.
-      </div>
-    </div>
-  </div>
-</div>
-
-
+<section id="e85-labs" class="level2">
+<h2 class="anchored" data-anchor-id="e85-labs">FPGA State Machine and Keyboard Labs</h2>
+<p><span class="entry-meta">Digital Electronics and Computer Engineering (ENGR85) | Spring 2026</span></p>
+<p>Built an LED-driving finite state machine and a four-key digital music keyboard that plays notes through an amplified speaker, both in SystemVerilog on an Altera Cyclone V E FPGA.</p>
+<p><strong>Skills:</strong> SystemVerilog, Quartus Prime, Altera Cyclone V E</p>
 </section>
+<section id="rov" class="level2">
+<h2 class="anchored" data-anchor-id="rov">Submersible ROV</h2>
+<p><span class="entry-meta">Introduction to Engineering Systems (ENGR79) | Fall 2025</span></p>
+<p>Capstone project for a course on linear time-invariant systems, completed on a two-person team. We assembled a remotely operated vehicle with a PVC frame and instrumented it with a thermistor for temperature and a pressure sensor for depth, using a custom PCB provided by the course. I designed and analyzed the RLC sensor-interface circuits and calibrated both sensors. For depth control, I chose the proportional gain from a Laplace-domain model of the vehicle built from its measured mass, buoyancy, and drag, then checked it against a LabVIEW simulation and step responses in a test tank. Data was collected with a National Instruments myDAQ.</p>
+<p><strong>Skills:</strong> RLC circuit design and analysis, sensor calibration, proportional control, Laplace-domain modeling, LabVIEW, myDAQ</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -544,7 +458,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/wood-zachary\.github\.io");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

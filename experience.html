@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Blog – Zachary Wood</title>
+<title>Research and Work Experience – Zachary Wood</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -37,8 +37,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./images/headshot.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -80,65 +78,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -327,7 +267,7 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./experience.html"> 
+    <a class="nav-link active" href="./experience.html" aria-current="page"> 
 <span class="menu-text">Experience</span></a>
   </li>  
   <li class="nav-item">
@@ -339,7 +279,7 @@ window.Quarto = {
 <span class="menu-text">Microprocessor Labs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="./blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
@@ -370,8 +310,24 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#research" id="toc-research" class="nav-link active" data-scroll-target="#research">Research</a>
+  <ul class="collapse">
+  <li><a href="#ace-lab" id="toc-ace-lab" class="nav-link" data-scroll-target="#ace-lab">Analog Circuit Engineering (ACE) Lab</a></li>
+  <li><a href="#sand-lab" id="toc-sand-lab" class="nav-link" data-scroll-target="#sand-lab">Sustainability and Network Design (SAND) Lab</a></li>
+  <li><a href="#cal-lab" id="toc-cal-lab" class="nav-link" data-scroll-target="#cal-lab">Computing for All Lab</a></li>
+  </ul></li>
+  <li><a href="#work" id="toc-work" class="nav-link" data-scroll-target="#work">Work</a>
+  <ul class="collapse">
+  <li><a href="#tutor" id="toc-tutor" class="nav-link" data-scroll-target="#tutor">Tutor and Grader</a></li>
+  <li><a href="#code-the-change" id="toc-code-the-change" class="nav-link" data-scroll-target="#code-the-change">Backend Developer, Code the Change</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -379,7 +335,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
+<h1 class="title">Research and Work Experience</h1>
 </div>
 
 
@@ -396,40 +352,52 @@ window.Quarto = {
 </header>
 
 
+<section id="research" class="level2">
+<h2 class="anchored" data-anchor-id="research">Research</h2>
+<section id="ace-lab" class="level3">
+<h3 class="anchored" data-anchor-id="ace-lab">Analog Circuit Engineering (ACE) Lab</h3>
+<p><span class="entry-meta">Harvey Mudd College, Department of Engineering | March 2026 - Present | Advisor: Prof.&nbsp;Matthew Spencer</span></p>
+<p>The ACE Lab is building a compact, low-power, research-grade electropenetrograph (EPG) sensor for research on insect feeding behavior. The team is split into analog, firmware, and software subteams. I am on the firmware team, where I write and debug C firmware for the version of the sensor built on a Nordic nRF development kit, primarily resolving communication issues between the analog front end and the host software.</p>
+<p>My current work covers:</p>
+<ul>
+<li>Stabilizing the Bluetooth Low Energy (BLE) link to a custom host application over the Nordic UART Service, and posting control-loop state and compressed waveform data back to the host.</li>
+<li>Replacing an external signal-generator chip with direct digital synthesis (DDS) in firmware.</li>
+<li>Adding configurable time-averaged (chopped) input-resistance (Ri) measurement.</li>
+<li>Characterizing and reducing the sensor’s power consumption, with a target reduction of over 90%.</li>
+</ul>
+<p><strong>Skills:</strong> C, Zephyr RTOS, nRF Connect SDK, BLE (Nordic UART Service), direct digital synthesis</p>
+</section>
+<section id="sand-lab" class="level3">
+<h3 class="anchored" data-anchor-id="sand-lab">Sustainability and Network Design (SAND) Lab</h3>
+<p><span class="entry-meta">Harvey Mudd College, Department of Computer Science | May 2026 - Present | Advisor: Prof.&nbsp;Arthi Padmanabhan</span></p>
+<p>This project measures the energy consumption and carbon-equivalent emissions that LLM crawlers and other bot traffic add to a web server. Over 700,000 requests from historical server logs are classified by source, such as crawlers, scrapers, cloud providers, and residential users, and replayed against a Raspberry Pi web server running Apache with TWiki and WordPress while a USB power meter records its power draw. Scheduled replays are then compared against grid carbon-intensity data to estimate how shifting traffic in time changes emissions. I write Python and Bash tooling on Linux for the measurement and analysis pipeline. A paper on the results is in preparation.</p>
+<p><strong>Skills:</strong> Python, Bash, Linux, Raspberry Pi, Apache, power measurement, carbon-intensity analysis</p>
+</section>
+<section id="cal-lab" class="level3">
+<h3 class="anchored" data-anchor-id="cal-lab">Computing for All Lab</h3>
+<p><span class="entry-meta">Harvey Mudd College, Department of Computer Science | May 2025 - July 2025</span></p>
+<p>Led development of a microcontroller programming curriculum (Arduino, CircuitPython) that introduces about 170 students each year to embedded systems and sensor integration. Co-developed revised units on introductory Python, circuit design, and assembly.</p>
+<p><strong>Skills:</strong> Arduino, CircuitPython, curriculum design</p>
+</section>
+</section>
+<section id="work" class="level2">
+<h2 class="anchored" data-anchor-id="work">Work</h2>
+<section id="tutor" class="level3">
+<h3 class="anchored" data-anchor-id="tutor">Tutor and Grader</h3>
+<p><span class="entry-meta">Harvey Mudd College, Department of Computer Science | August 2025 - Present</span></p>
+<p>Tutor students and grade assignments for introductory computer science (about 170 students), applying the curriculum developed in the Computing for All Lab.</p>
+</section>
+<section id="code-the-change" class="level3">
+<h3 class="anchored" data-anchor-id="code-the-change">Backend Developer, Code the Change</h3>
+<p><span class="entry-meta">December 2024 - April 2026</span></p>
+<p>Led backend development (Node.js, Express, MongoDB) for two client websites built on the MERN stack: an educational site for the Museum of Science in collaboration with MIT, and a scholarship platform for the Children’s Foundation of America.</p>
+<p><strong>Skills:</strong> Node.js, Express, MongoDB</p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cmVmbGVjdGlvbg==" data-listing-date-sort="1788332400000" data-listing-file-modified-sort="1790631163912" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="196">
-<div class="thumbnail"><a href="./posts/first-post.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/first-post.html" class="no-external">Initial Reflections</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/first-post.html" class="no-external">
-<p>Some of my goals for my semester in MicroPs</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/first-post.html" class="no-external">
-<div class="listing-date">
-Sep 2, 2026
-</div>
-<div class="listing-author">
-Zachary Wood
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
