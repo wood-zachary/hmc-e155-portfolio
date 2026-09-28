@@ -1,0 +1,54 @@
+---
+title: "Class Projects"
+---
+
+## Microprocessor-Based Systems Labs {#e155}
+
+[Microprocessor-Based Systems: Design and Applications (ENGR155) |
+Fall 2026]{.entry-meta}
+
+FPGA and microcontroller labs on a Lattice iCE40UP5K FPGA and an
+STM32L432KC microcontroller, each documented in a full lab report. See the
+[lab reports](labs.qmd).
+
+## Multicycle RISC-V Processor {#riscv}
+
+[Digital Electronics and Computer Engineering (ENGR85) |
+Spring 2026]{.entry-meta}
+
+Designed a multicycle RISC-V processor in SystemVerilog that supports about
+30 instructions. I built it bottom-up: the individual modules first, then the
+control path and its finite state machine, then the datapath. Each module has
+its own unit testbench, and the complete processor was verified in QuestaSim
+by running a system-level assembly program and checking register values in
+the waveforms.
+
+**Skills:** SystemVerilog, RISC-V, finite state machines, QuestaSim
+
+## FPGA State Machine and Keyboard Labs {#e85-labs}
+
+[Digital Electronics and Computer Engineering (ENGR85) |
+Spring 2026]{.entry-meta}
+
+Built an LED-driving finite state machine and a four-key digital music
+keyboard that plays notes through an amplified speaker, both in SystemVerilog
+on an Altera Cyclone V E FPGA.
+
+**Skills:** SystemVerilog, Quartus Prime, Altera Cyclone V E
+
+## Submersible ROV {#rov}
+
+[Introduction to Engineering Systems (ENGR79) | Fall 2025]{.entry-meta}
+
+Capstone project for a course on linear time-invariant systems, completed on
+a two-person team. We assembled a remotely operated vehicle with a PVC frame
+and instrumented it with a thermistor for temperature and a pressure sensor
+for depth, using a custom PCB provided by the course. I designed and analyzed
+the RLC sensor-interface circuits and calibrated both sensors. For depth
+control, I chose the proportional gain from a Laplace-domain model of the
+vehicle built from its measured mass, buoyancy, and drag, then checked it
+against a LabVIEW simulation and step responses in a test tank. Data was
+collected with a National Instruments myDAQ.
+
+**Skills:** RLC circuit design and analysis, sensor calibration, proportional
+control, Laplace-domain modeling, LabVIEW, myDAQ

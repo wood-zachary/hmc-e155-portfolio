@@ -1,7 +1,10 @@
 ---
-title: "E155 Resources"
-about:
-    template: jolla
+title: "Resources"
+aliases:
+  - /hmc-e155-portfolio/resources.html
 ---
 
-[Link to course website.](https://hmc-e155.github.io/)
+- [Microprocessor-Based Systems (ENGR155) course website][e155]: lab
+  assignments, specifications, and tutorials for the lab reports on this site.
+
+[e155]: https://hmc-e155.github.io/

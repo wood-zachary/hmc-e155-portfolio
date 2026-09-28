@@ -2,22 +2,39 @@ project:
   type: website
 
 website:
-  title: "E155 Portfolio"
+  title: "Zachary Wood"
+  site-url: https://wood-zachary.github.io
+  description: >-
+    Portfolio of Zachary Wood, a computer science student at Harvey Mudd College focused on FPGA design, computer architecture, and embedded systems.
+  favicon: images/headshot.jpg
   navbar:
     left:
     - href: index.qmd
       text: Home
+    - href: experience.qmd
+      text: Experience
+    - href: projects.qmd
+      text: Class Projects
     - href: labs.qmd
-      text: Labs
-    - href: resources.qmd
-      text: Resources
+      text: Microprocessor Labs
     - href: blog.qmd
       text: Blog
+    - href: resources.qmd
+      text: Resources
+    right:
+    - icon: github
+      href: https://github.com/wood-zachary
+      target: _blank
+    - icon: linkedin
+      href: https://www.linkedin.com/in/zwoodhmc/
+      target: _blank
 
 format:
   html:
     theme:
-    - cosmo
-    - brand
+      light:
+      - cosmo
+      - brand
+      dark: darkly
     css: styles.css
     toc: true

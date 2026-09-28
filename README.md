@@ -1,16 +1,21 @@
-# E155 Portfolio
+# wood-zachary.github.io
 
-A Quarto website for Harvey Mudd's E155 (Microprocessor-based Systems Design and Applications), containing lab reports, blog posts, and resources.
+Source for Zachary Wood's portfolio, a Quarto website published at
+<https://wood-zachary.github.io>.
 
 ## Structure
 
-- `index.qmd`: the homepage
-- `labs.qmd` & `labs/lab1`–`lab7`: my lab reports and code
-- `blog.qmd` & `posts/`: a blog
-- `resources.qmd`: links to the official course website
-- `_quarto.yml` & `styles.css`: site config and styling
+- `index.qmd`: home page
+- `experience.qmd`: research and work experience
+- `projects.qmd`: class projects
+- `labs.qmd` and `labs/lab1` to `labs/lab7`: Microprocessor-Based Systems
+  (ENGR155) lab reports and source code
+- `personal.qmd`: personal projects
+- `blog.qmd` and `posts/`: blog
+- `resources.qmd`: external resources
+- `_quarto.yml` and `styles.css`: site configuration and styling
 
-## Labs
+## Microprocessor-Based Systems Labs
 
 1. FPGA and MCU Setup and Testing
 2. Multiplexed 7-Segment Display
