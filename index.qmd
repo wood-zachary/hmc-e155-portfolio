@@ -71,7 +71,7 @@ reading and writing fantasy and science fiction, or studying Mandarin.
 
   <a class="proj-card" href="projects.html#rov">
     <img class="proj-img" src="images/e79_labview.png"
-         alt="LabVIEW block diagram of the ROV position control loop">
+         alt="LabVIEW simulation of the ROV's proportional depth controller">
     <div class="proj-label">
       <p class="proj-context">Coursework</p>
       <p class="proj-name">Submersible ROV</p>

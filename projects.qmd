@@ -44,9 +44,11 @@ Capstone project for a course on linear time-invariant systems, completed on
 a two-person team. We assembled a remotely operated vehicle with a PVC frame
 and instrumented it with a thermistor for temperature and a pressure sensor
 for depth, using a custom PCB provided by the course. I designed and analyzed
-the RLC sensor-interface circuits, calibrated both sensors, and tuned a PID
-controller in LabVIEW from a Laplace-domain analysis of the system. Data was
+the RLC sensor-interface circuits and calibrated both sensors. For depth
+control, I chose the proportional gain from a Laplace-domain model of the
+vehicle built from its measured mass, buoyancy, and drag, then checked it
+against a LabVIEW simulation and step responses in a test tank. Data was
 collected with a National Instruments myDAQ.
 
-**Skills:** RLC circuit design and analysis, sensor calibration, PID control,
-LabVIEW, myDAQ
+**Skills:** RLC circuit design and analysis, sensor calibration, proportional
+control, Laplace-domain modeling, LabVIEW, myDAQ
