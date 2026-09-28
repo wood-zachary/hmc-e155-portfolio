@@ -251,7 +251,7 @@ window.Quarto = {
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>The goal of this lab was to learn how to use time multiplexing to efficiently use the I/O on an FPGA. I Implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins, built a simple transistor circuit to drive large currents from the FPGA pins, and installed a keypad and verified that logic signals can pass through it.</p>
+<p>The goal of this lab was to learn how to use time multiplexing to efficiently use the I/O on an FPGA. I implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins, built a simple transistor circuit to drive large currents from the FPGA pins, and installed a keypad and verified that logic signals can pass through it.</p>
 </section>
 <section id="design-and-testing-methodology" class="level2">
 <h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
@@ -343,7 +343,7 @@ window.Quarto = {
 <p><strong>Transistor base current.</strong> Both the 2N3906 and 2N3904 transistors use an 820 Ω base resistor. With a standard silicon <span class="math inline">\(V_{BE(on)} = 0.7\text{ V}\)</span>:</p>
 <p><span class="math display">\[I_B = \frac{V_{DD} - V_{BE(on)}}{R_B} = \frac{3.3\text{ V} - 0.7\text{ V}}{820\ \Omega} \approx 3.2\text{ mA}\]</span></p>
 <p>well under the FPGA’s 8 mA maximum.</p>
-<p><strong>Multiplexing and scanning rates.</strong> <code>HSOSC</code> defaults to 48 MHz. The mux counter (<code>MAX = 16'd47_999</code>) toggles digits every 24,000 cycles, resulting in a 1 kHz toggle rate between digits. The scan counter (<code>MAX = 25'd23_999_999</code>) asserts each row for 6,000,000 of 24,000,000 cycles, resulting in a 2 Hz toggle rate across all 4 rows.</p>
+<p><strong>Multiplexing and scanning rates.</strong> <code>HSOSC</code> defaults to 48 MHz. The mux counter (<code>MAX = 16'd47_999</code>) toggles digits every 24,000 cycles, resulting in a 2 kHz toggle rate between digits, or a 1 kHz refresh rate for each digit. The scan counter (<code>MAX = 25'd23_999_999</code>) asserts each row for 6,000,000 of 24,000,000 cycles, resulting in a 2 Hz toggle rate across all 4 rows.</p>
 </section>
 </section>
 </section>
