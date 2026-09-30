@@ -27,7 +27,11 @@ int digitalRead(int pin) {
 }
 
 void digitalWrite(int pin, int val) {
-    GPIO->ODR |= (1 << pin);
+    if (val) {
+        GPIO->ODR |= (1 << pin);
+    } else {
+        GPIO->ODR &= ~(1 << pin);
+    }
 }
 
 void togglePin(int pin) {
