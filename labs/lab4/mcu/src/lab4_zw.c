@@ -1,6 +1,10 @@
-// lab4_starter.c
-// Fur Elise, E155 Lab 4
-// Updated Fall 2024
+// lab4_zw.c
+// Digital Audio, E155 Lab 4
+
+#include "STM32L432KC_FLASH.h"
+#include "STM32L432KC_GPIO.h"
+#include "STM32L432KC_RCC.h"
+#include "STM32L432KC_TIMER.h"
 
 // Pitch in Hz, duration in ms
 const int notes[][2] = {
