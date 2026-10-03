@@ -1,10 +1,10 @@
 // lab4_zw.c
 // Digital Audio, E155 Lab 4
 
-#include "STM32L432KC_FLASH.h"
-#include "STM32L432KC_GPIO.h"
-#include "STM32L432KC_RCC.h"
-#include "STM32L432KC_TIMER.h"
+#include "../lib/STM32L432KC_FLASH.h"
+#include "../lib/STM32L432KC_GPIO.h"
+#include "../lib/STM32L432KC_RCC.h"
+#include "../lib/STM32L432KC_TIMER.h"
 
 #define SPEAKER_PIN 3
 
