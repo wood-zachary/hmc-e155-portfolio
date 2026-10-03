@@ -50,17 +50,17 @@ PB3 also drives LED D5 on the development board, so the LED lights during notes 
 
 ### Hardware
 
-PB3 drives one end of a $10\text{ k}\Omega$ 3362P potentiometer whose other end is grounded, so the wiper outputs an adjustable fraction of the 3.3 V square wave. The wiper drives the noninverting input (pin 3) of an LM386 audio amplifier, whose negative input (pin 2) is grounded. Pins 1 and 8 are left open, which sets the gain to 20 (26 dB), and the amplifier is powered from the development board's 5V rail. The output (pin 5) drives the $8\ \Omega$ speaker directly. As the lab permits, the output coupling capacitor and the $0.05\ \mu\text{F}$ and $10\ \Omega$ network from the datasheet's example circuit were omitted.
+PB3 drives one end of a $10\text{ k}\Omega$ 3362P potentiometer whose other end is grounded, so the wiper outputs an adjustable fraction of the 3.3 V square wave. The wiper drives the noninverting input (pin 3) of an LM386 audio amplifier, whose inverting input (pin 2) is grounded. Pins 1 and 8 are left open, which sets the gain to 20 (26 dB), and the amplifier is powered from the development board's 5V rail. The output (pin 5) drives the $8\ \Omega$ speaker directly. As the lab permits, the output coupling capacitor and the $0.05\ \mu\text{F}$ and $10\ \Omega$ network from the datasheet's example circuit were omitted.
 
 The potentiometer sets the volume, and it also keeps pin 3 within the LM386's absolute maximum input of $\pm 0.4$ V, which the 3.3 V GPIO signal would otherwise exceed.
 
 ### Extra Composition
 
-The second song is the melody line of John Dowland's *Tarleton's Jig* (also known as *Tarleton's Willy*), transcribed from a [ukulele arrangement](https://renaissance-ukulele.blogspot.co.uk) in 6/8 time. I used an eighth note of 150 ms, so each bar lasts 900 ms, and wrote out the repeats and the first and second endings in the array. Pitches are equal-tempered frequencies rounded to the nearest hertz. Consecutive repeated notes would otherwise merge into one continuous tone, so I shortened the first of each pair by 25 ms and inserted a 25 ms rest, which preserves the length of the bar.
+The second song is the melody line of John Dowland's *Tarleton's Jig* (also known as *Tarleton's Willy*), transcribed from a [ukulele arrangement](https://renaissance-ukukele.blogspot.com/2020/10/dowland-tarletons-jig-or-tarletons-willy.html) in 6/8 time. I used an eighth note of 150 ms. Pitches are frequencies rounded to the nearest hertz. Consecutive repeated notes would otherwise merge into one continuous tone, so I shortened the first of each pair by 25 ms and inserted a 25 ms rest.
 
 ### Testing
 
-I first verified the square wave on PB3 with an oscilloscope, checking the pitch and duration of the first notes and that the pin stayed low during rests. I then built the amplifier circuit and checked its output with an $8\ \Omega$ dummy load, following the course's speaker protection procedure, before connecting the speaker. Finally, I played both songs to verify the pitches, tempo, rests, and volume control.
+I first verified the square wave on PB3 with an oscilloscope, checking the pitch and duration of the first notes and that the pin stayed low during rests. I then built the amplifier circuit and checked its output with an $8\ \Omega$ dummy load, following the speaker protection procedure, before connecting the speaker. Finally, I played both songs to verify the pitches, tempo, rests, and volume control.
 
 ## Technical Documentation
 
@@ -110,7 +110,7 @@ The error is therefore at most 1% whenever $N \ge 50$, which holds for every fre
 
 $$f_{min} = \frac{10^6}{2(65536)} = 7.63\text{ Hz}$$
 
-Since pitches are integers, the lowest playable pitch is 8 Hz ($N = 62500$), and the code plays lower pitches as silence rather than overflowing ARR. The highest frequency guaranteed to be within 1% is 10 kHz ($N = 50$). The hardware limit is $N = 1$, or 500 kHz, but the rounding error there is large and the time the polling loop takes to respond becomes significant.
+Since pitches are integers, the lowest playable pitch is 8 Hz ($N = 62500$), and the code plays lower pitches as silence rather than overflowing ARR. The highest frequency guaranteed to be within 1% is 10 kHz ($N = 50$). The hardware limit is $N = 1$, or 500 kHz.
 
 **Duration range.** Durations have a resolution of 1 ms, so the shortest note is 1 ms. The elapsed milliseconds are counted in an `int` rather than in ARR, so the longest note is $2^{31} - 1$ ms, about 24.9 days. A duration of 0 ends the song.
 
@@ -124,7 +124,7 @@ Checking only 220 Hz and 1000 Hz is not sufficient on its own. The error does no
 
 The design meets all of the lab's proficiency and excellence requirements. It plays Fur Elise with the correct pitches, tempo, and rests, plays *Tarleton's Jig* as an extra composition, and the potentiometer adjusts the volume. The timers are accessed through memory-mapped registers defined with `#define` macros and a register struct, and rests never reach the half-period calculation, so the code never divides by zero.
 
-The main limitation of the design is that the CPU busy-waits in the polling loop for the entire song. A timer with an output channel, such as TIM15 or TIM16, could generate the square wave in hardware with PWM, and an update interrupt could replace the duration polling, which would leave the CPU free during each note.
+The main limitation of the design is that the CPU busy-waits in the polling loop for the entire song. TIM2, whose channel 2 is available on PB3 through alternate function AF1, could generate the square wave in hardware with PWM, and an update interrupt could replace the duration polling, which would leave the CPU free during each note.
 
 ## Conclusion
 
@@ -132,9 +132,39 @@ The design played Fur Elise and *Tarleton's Jig* on a speaker using a timer driv
 
 ::: {.callout-note collapse="true"}
 ## Hours spent (click to expand)
-<!-- TODO -->
+I spent 16 hours on this lab. For instructor reference, I spent 3 hours reviewing the lab materials and slides (I missed three lectures due to sickness and injury), 2 hours planning the lab, 1 hour drawing my schematic, 3 hours coding, 2 hours working on and debugging hardware, and 5 hours writing the lab report and completing the AI prototype (ChatGPT gives very long answers).
 :::
 
 ## AI Prototype Summary
 
-<!-- TODO -->
+The purpose of this AI Prototype is to test whether an LLM can act as a documentation search assistant, navigating the reference manual and datasheet to choose and configure a peripheral.
+
+::: {.callout-tip collapse="true"}
+## Prompt 1 (ChatGPT, anonymous session)
+What timers should I use on the STM32L432KC to generate frequencies ranging from 220Hz to 1kHz? What's the best choice of timer if I want to easily connect it to a GPIO pin? What formulae are relevant, and what registers need to be set to configure them properly?
+:::
+
+::: {.callout-tip collapse="true"}
+## Prompt 2 (RM0394 attached)
+I attached `rm0394.pdf`, and ChatGPT replied:
+
+> I see you've uploaded RM0394, the STM32L4 reference manual. I can use it to pin down the timer, clock-tree, GPIO alternate-function, and register details from the actual reference manual rather than relying on generic STM32 information.
+>
+> For example, the manual's contents place the timer-clock configuration in Section 6.2.14, GPIO alternate-function mapping in Section 8.3.2/Section 8.3.11, and the timer peripherals/interconnections in the later timer chapters.
+>
+> If you want, I can now go through RM0394 and give you a corrected, register-by-register TIM15/TIM16 or TIM2 configuration for the L432KC, including the exact register bit fields and the relevant page/section references.
+
+I then asked:
+
+Give me a corrected, register-by-register TIM15/TIM16 or TIM2 configuration for the L432KC
+:::
+
+I ran this prototype in an anonymous ChatGPT session because Claude rejected the reference manual's file size. I asked the prompt first without any documents, then attached RM0394 and asked for a corrected, register-by-register configuration.
+
+I would rate the output as useful for orientation but unreliable in its details. A single answer named the timers with output channels, gave the formulas relating PSC and ARR to the output frequency, and listed the registers to configure, which would have taken me much longer to assemble from the reference manual, the datasheet, and the board manual. However, a few of its specific values were wrong, including a frequency calculation and a missing register setting.
+
+Attaching the reference manual did not make the answer more accurate. The second response cited section numbers and added register settings, but its one explicit correction changed a correct alternate-function number to an incorrect one. The per-pin alternate-function table appears only in the datasheet, so the attached manual could not have supported the change, which shows that giving an LLM a document does not ensure that it answers from that document.
+
+The LLM generated register-level C code, but the code used CMSIS definitions, which this lab prohibits, and it only produced a tone with no way to time notes or play rests. Also, because the prompt asked for an easy connection to a GPIO pin, it recommended TIM16 with hardware PWM, while I chose the basic timers TIM6 and TIM7 because their register layouts allow for just one driver, and toggling the pin in software met the lab's requirements.
+
+Overall, the LLM works better as a documentation search assistant than as an HDL generator. A pointer to a section or a formula is quick to verify, while the HDL prototypes in lab 3 had to be read and tested to find their problems. To use it effectively, I would state the lab and board constraints in the prompt, ask it to name the document and table behind each value, and use its answers to decide where to look, taking the final values from the documents themselves.
