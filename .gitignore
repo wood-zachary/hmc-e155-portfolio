@@ -11,6 +11,8 @@ Thumbs.db
 **/Debug/
 *.emSession
 *.jlink
+**/segger_project/*
+!**/segger_project/*.emProject
 **/*.quarto_ipynb
 
 # Lattice Radiant
